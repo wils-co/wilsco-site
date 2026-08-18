@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wilsco — Progress: the first seven weeks</title>
+<meta name="description" content="Seven weeks from a new Mac Studio to a measured, multi-agent local AI stack. A progress report from a public journey from sales into AI engineering.">
+<meta property="og:title" content="Wilsco — Progress: the first seven weeks">
+<meta property="og:description" content="Mid-June to 8 August 2026: what got built, what got measured, and what failed in useful ways.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f7f4ee;
+    --ink: #201d18;
+    --ink-60: rgba(32,29,24,0.62);
+    --ink-40: rgba(32,29,24,0.42);
+    --ink-15: rgba(32,29,24,0.15);
+    --ink-08: rgba(32,29,24,0.08);
+    --gold: #b97f34;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: var(--gold); }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 28px; }
+
+  /* header */
+  header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 36px 0 0;
+  }
+  .mark { font-family: var(--serif); font-size: 25px; }
+  .mark a:hover { color: var(--ink); }
+  nav { display: flex; gap: 30px; }
+  nav a { font-size: 11px; letter-spacing: 0.18em; color: var(--ink-40); }
+
+  /* hero */
+  .hero { padding: 96px 0 64px; }
+  .kicker {
+    font-size: 11px; letter-spacing: 0.22em; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 26px;
+  }
+  h1 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(42px, 6.5vw, 74px); line-height: 1.05;
+    text-wrap: balance; margin-bottom: 26px;
+  }
+  h1 em { font-style: italic; color: var(--gold); }
+  .lede { max-width: 620px; color: var(--ink-60); }
+
+  /* stat strip */
+  .stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    border-top: 1px solid var(--ink-15); border-bottom: 1px solid var(--ink-15);
+    margin: 24px 0 0;
+  }
+  .stat { padding: 26px 20px 26px 0; }
+  .stat + .stat { padding-left: 20px; border-left: 1px solid var(--ink-08); }
+  .stat b { display: block; font-family: var(--serif); font-weight: 400; font-size: 34px; line-height: 1.1; }
+  .stat span { font-size: 11px; letter-spacing: 0.14em; color: var(--ink-40); text-transform: uppercase; }
+
+  /* sections */
+  section { padding: 76px 0 0; }
+  .sec-label {
+    font-size: 11px; letter-spacing: 0.22em; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 18px;
+  }
+  h2 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(30px, 4vw, 42px); line-height: 1.15;
+    margin-bottom: 22px; text-wrap: balance;
+  }
+  h2 em { font-style: italic; color: var(--gold); }
+  .prose { max-width: 660px; color: var(--ink-60); }
+  .prose p + p { margin-top: 16px; }
+  .prose strong { color: var(--ink); font-weight: 500; }
+
+  /* timeline */
+  .timeline { margin-top: 44px; border-left: 1px solid var(--ink-15); }
+  .t-entry { position: relative; padding: 0 0 44px 34px; }
+  .t-entry::before {
+    content: ''; position: absolute; left: -5px; top: 8px;
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--paper); border: 2px solid var(--gold);
+  }
+  .t-date { font-size: 11px; letter-spacing: 0.18em; color: var(--gold); text-transform: uppercase; }
+  .t-entry h3 { font-family: var(--serif); font-weight: 400; font-size: 24px; margin: 6px 0 10px; }
+  .t-entry p { color: var(--ink-60); max-width: 620px; }
+  .t-entry p + p { margin-top: 10px; }
+
+  /* cards */
+  .cards {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1px; background: var(--ink-15);
+    border: 1px solid var(--ink-15); margin-top: 40px;
+  }
+  .card { background: var(--paper); padding: 28px 24px; }
+  .card h3 { font-family: var(--serif); font-weight: 400; font-size: 23px; margin-bottom: 4px; }
+  .card .tag { font-size: 10px; letter-spacing: 0.16em; color: var(--gold); text-transform: uppercase; }
+  .card p { font-size: 13.5px; color: var(--ink-60); margin-top: 12px; }
+
+  /* table */
+  .tbl-wrap { overflow-x: auto; margin-top: 36px; border-top: 1px solid var(--ink-15); }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 560px; }
+  th {
+    text-align: left; font-weight: 500; font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-40);
+    padding: 14px 18px 14px 0; border-bottom: 1px solid var(--ink-15);
+  }
+  td { padding: 13px 18px 13px 0; border-bottom: 1px solid var(--ink-08); color: var(--ink-60); vertical-align: top; }
+  td:first-child { color: var(--ink); }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* lessons */
+  .lessons { margin-top: 40px; counter-reset: lesson; max-width: 700px; }
+  .lesson {
+    counter-increment: lesson;
+    display: grid; grid-template-columns: 56px 1fr; gap: 8px;
+    padding: 22px 0; border-top: 1px solid var(--ink-08);
+  }
+  .lesson::before {
+    content: counter(lesson, decimal-leading-zero);
+    font-family: var(--serif); font-size: 22px; color: var(--gold);
+  }
+  .lesson b { display: block; font-weight: 500; margin-bottom: 4px; }
+  .lesson p { font-size: 13.5px; color: var(--ink-60); }
+
+  /* footer */
+  footer {
+    margin-top: 100px; padding: 34px 0 44px;
+    border-top: 1px solid var(--ink-15);
+    display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+    font-size: 11px; letter-spacing: 0.14em; color: var(--ink-40); text-transform: uppercase;
+  }
+  footer .links { display: flex; gap: 26px; }
+
+  @media (max-width: 560px) {
+    .hero { padding: 68px 0 48px; }
+    .stat + .stat { border-left: none; padding-left: 0; border-top: 1px solid var(--ink-08); }
+    .stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="mark"><a href="/">wilsco.</a></div>
+    <nav>
+      <a href="https://github.com/wils-co">GITHUB ↗</a>
+      <a href="https://x.com/wilsco_">X ↗</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div class="kicker">Progress report · Mid-June — 8 August 2026</div>
+    <h1>Seven weeks in. <em>Curiosity, compounding.</em></h1>
+    <p class="lede">In mid-June 2026 a Mac Studio arrived and a public repositioning began: from a sales career into AI engineering, documented in the open. This is what seven weeks of evenings and weekends actually produced — measured, shipped, and honestly logged, including the failures.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b>256 GB</b><span>M3 Ultra unified memory</span></div>
+    <div class="stat"><b>10</b><span>Engines on one dashboard</span></div>
+    <div class="stat"><b>3</b><span>Serving runtimes, tested head-to-head</span></div>
+    <div class="stat"><b>9</b><span>Adopt / trial / park verdicts on record</span></div>
+  </div>
+
+  <section id="goal">
+    <div class="sec-label">The goal</div>
+    <h2>Work over resume, on an <em>18-month</em> clock.</h2>
+    <div class="prose">
+      <p>The aim is a credible transition into AI engineering over roughly eighteen months — evidenced publicly through working systems, real measurements, and decision records, not job titles. The machine is a Mac Studio M3 Ultra with 256 GB of unified memory, chosen for one reason: single-user decode speed on Apple Silicon is memory-bandwidth-bound, so mixture-of-experts models with small <em>active</em> parameter counts give big-model quality at small-model speed, and 256 GB holds several different model families resident at once.</p>
+      <p>Everything below was self-taught along the way: Git and GitHub, the command line, Python environment management, launchd automation, model serving, and agent orchestration — starting from sales, not software.</p>
+    </div>
+  </section>
+
+  <section id="timeline">
+    <div class="sec-label">The timeline</div>
+    <h2>From unboxing to a <em>measured</em> fleet.</h2>
+
+    <div class="timeline">
+
+      <div class="t-entry">
+        <div class="t-date">Mid–late June 2026</div>
+        <h3>Arrival and first automations</h3>
+        <p>The Studio lands. First projects within days: scheduled data pipelines on launchd, a personal mission-control dashboard, a curriculum-aligned learning platform scaffold for the kids (Khaizen), and the first local inference experiments. Most of this era's code was later superseded — which is the point of keeping it.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">5–7 July 2026</div>
+        <h3>The second brain, and the first principle written down</h3>
+        <p>A plain-markdown PARA vault becomes the shared memory for every agent on the machine — git-tracked, with a strict provenance convention separating human thought from AI-written content. The stack's core principle is recorded: <strong>active parameters, not total parameters</strong>, set throughput. First real A/B follows immediately: two models tested on an actual task (editing a file per written conventions); the slower model followed instructions reliably and won the default slot. Same stretch: built the session-summariser that now feeds this page's source notes — then disabled its automatic end-of-session trigger after it fired on the wrong signal (see What failed).</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">8–10 July 2026</div>
+        <h3>Root causes, not workarounds</h3>
+        <p>A hard crash in agentic loops is traced to a landmine in a stock chat template and patched at the template level. Then a bigger find: a model that failed in one serving runtime ran cleanly on two others — same weights. <strong>The serving layer is part of the system.</strong> A fixed-task, 100-point eval series across nine configurations lands the keeper setup: a frontier orchestrator delegating to a local worker scored 100/100 — but only when the worker was served by the right engine.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">Mid-July 2026</div>
+        <h3>Real workloads move local</h3>
+        <p>A household finance workflow migrates out of a cloud chat product into a local pipeline: a rules-as-markdown categorisation engine with a locked match order and golden-replay tests, plus a React dashboard. First run on real monthly data lands at ~72% auto-categorised; iterated against the actual failures, not synthetic ones, to 100% auto across 190 unique transactions for that close (one-offs folded into rules; later months still expected to leave judgment cases). Verification becomes a two-model ritual — one agent designs falsifiable tests, another executes them, and neither is trusted alone. A first stack audit goes on record, and the team roster gets a single source of truth with named seats, engine rules, and a change log.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">23–28 July 2026</div>
+        <h3>The eval gauntlet — and honest failure logs</h3>
+        <p>A week of purpose-built harnesses (game-generation rigs with real syntax gates, scope-locked workspaces, judge-verified drills) surfaces the local tier's true failure modes: polished code with fatal one-character bugs, models claiming success without calling a single tool, rewrite spirals on trivial tasks. Two findings are publicly retracted in the same file when re-testing proved them wrong — the methodology was the bug, not the model.</p>
+        <p>The week ends with a task-grounded bake-off on a real production job: every model that actually ran the pipeline converged on the identical correct answer, but local models fumbled execution and delivery in three distinct ways while API models went clean first try. Conclusion recorded with its caveats attached, not hardened into dogma.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">26–31 July 2026</div>
+        <h3>agent-os: the fleet gets an operability surface</h3>
+        <p>A single-file dashboard — stdlib Python backend, one HTML file — that reads every engine's on-disk state and answers the morning-glance questions in under two minutes: who's live, what's burning resources, where's the handoff. Built from v1 to v8.1 in six days by a multi-agent team with an explicit authorship map. It discovers engines dynamically rather than trusting a whitelist — and promptly found more running profiles than the documentation claimed, plus real bugs in the stack it observes: a stale state file, a broken scheduled delivery, a timezone bug hiding half a day of usage data.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">30–31 July 2026</div>
+        <h3>Decisions become a pipeline</h3>
+        <p>A repeatable "should I adopt this?" system ships: every candidate tool gets a structured brief — the gap it closes, what it collides with, the smallest honest experiment, and a verdict of adopt, trial, park, or skip — with a lifecycle and an auto-generated index. Nine verdicts on record in the first two days, with a standing rule of at most two things in trial at once.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">1–8 August 2026</div>
+        <h3>Testing the fleet instead of trusting it</h3>
+        <p>The identical real job — pull two YouTube transcripts, distill into an HTML page — run on three model seats in parallel: a fast, free, cloud-routed model finishes with a complete artifact; a slower local model needs a manual nudge past its own iteration cap; a third fails three tool calls (including a syntax error) and delivers nothing. The winning output isn't taken at its word — speaker lines and headline quotes checked against an independent transcript; a stack-speed claim in the same page did not survive that check.</p>
+        <p>Separately, a two-week-old "can't be trusted with stateful code" verdict on a local model gets re-tested instead of carried forward. Mechanical probes reverse the hard deny to conditional: two July-failing game builds pass in August. Paired with a stronger reasoning model as its planner, the same model then clears a task class it died on solo in July. One stubborn failure along the way is a permission-grammar bug blocking file access, not a capability gap — found and fixed.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="running">
+    <div class="sec-label">Running now</div>
+    <h2>The systems that <em>stayed</em>.</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="tag">Active practice</div>
+        <h3>Local agent team</h3>
+        <p>Named seats on defined engines: a frontier orchestrator that judges and delegates, local workers that draft and execute, and hard serving rules earned through testing. Roles over a model zoo.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Active</div>
+        <h3>Hermes</h3>
+        <p>An independent agent colleague with its own loop, tools, and memory — reachable in the terminal or over Telegram when away from the machine. Levelled as a peer, not a thin bot.</p>
+      </div>
+      <div class="card">
+        <div class="tag">v8.1 · in progress</div>
+        <h3>agent-os</h3>
+        <p>Fleet-control dashboard reading live state across ten engines: activity ticker, token usage, session viewer, project board, and a nightly self-audit job that has caught real faults.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Ongoing system</div>
+        <h3>Second brain</h3>
+        <p>A markdown vault every agent can read and write, with human-versus-AI provenance on every file. Storage is shared; each reader pays its own context cost — and the distinction matters.</p>
+      </div>
+      <div class="card">
+        <div class="tag">In production</div>
+        <h3>Household CFO</h3>
+        <p>A local categorisation engine with rules-as-markdown, golden-replay tests, and a dashboard — migrated off a cloud chat product, now doubling as a bake-off harness for model reliability.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Living</div>
+        <h3>Open practice of learning</h3>
+        <p>Distilled topic notes, stack-fit decision cards, and recurring audits — the source this page is curated from.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="measured">
+    <div class="sec-label">Measured, not assumed</div>
+    <h2>Numbers from <em>real</em> tasks.</h2>
+    <p class="prose">Decode speed on this machine, measured per model — the table that justifies the mixture-of-experts-first policy. Active parameters (the <span class="num">a4b</span> / <span class="num">a3b</span> suffixes) set the speed, not total size.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Model</th><th>Architecture</th><th class="num">tok/s</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>gemma-4-26b-a4b (QAT 4-bit)</td><td>MoE, 4B active</td><td class="num">≈100</td></tr>
+          <tr><td>qwen3.6-35b-a3b (8-bit)</td><td>MoE, 3B active</td><td class="num">≈80</td></tr>
+          <tr><td>qwen3.6-27b (4-bit + speculative decode)</td><td>Dense 27B</td><td class="num">≈50</td></tr>
+          <tr><td>qwen3.6-27b (8-bit)</td><td>Dense, all 27B active</td><td class="num">≈23</td></tr>
+          <tr><td>gemma-4-31b (8-bit)</td><td>Dense, all 31B active</td><td class="num">≈20</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prose" style="margin-top:28px">
+      <p>Other results on record: a 100/100 orchestrator-plus-local-worker score on a fixed judged task; a three-model tie at 100% on pure tool-calling mechanics (the reliability gap lives elsewhere); a 156 GB frontier-class local model that passed a production gate exactly — then benchmarked at ≈7.5 tok/s and was honestly filed as "background jobs only"; and a free, cloud-routed seat that outdelivered two local seats on an identical real task — quotes and speakers checked against an independent transcript; one stack claim in that page did not.</p>
+    </div>
+  </section>
+
+  <section id="failures">
+    <div class="sec-label">What failed</div>
+    <h2>The failures are the <em>curriculum</em>.</h2>
+    <div class="prose">
+      <p>Building in public means logging what broke, because that is where the learning compressed. A session-summary hook fired twenty times in two minutes and polluted its own dataset — then, run on its own build log, showed a self-referential misread and a truncation bug that dropped the first ~24,000 characters of long transcripts. The most polished code repeatedly hid the most severe bugs — including a local function that shadowed a JavaScript built-in and recursed infinitely on first click. One model verbally committed to a task across four turns without ever calling a tool. Well-hedged advice from a credible source made results measurably worse here, because it came from a different serving stack. Stateful single-file app generation was gated <strong>closed</strong> for the local tier in late July; August re-tests moved that class to <strong>conditional</strong> (run-verify before ship), in writing, in the same record.</p>
+      <p>And twice in one day, findings already written down were retracted in place when re-testing showed the test method — not the model — was at fault. The record stays honest or it is worthless.</p>
+    </div>
+  </section>
+
+  <section id="principles">
+    <div class="sec-label">How I work</div>
+    <h2>Principles, earned the <em>slow</em> way.</h2>
+    <div class="lessons">
+      <div class="lesson"><div><b>Reliability &gt; speed &gt; size.</b><p>A fast model that malforms tool calls is useless in an agent loop. A broken free worker costs more than no worker (~2.4× once recovery is counted).</p></div></div>
+      <div class="lesson"><div><b>Active params, not total params.</b><p>Single-stream decode is memory-bandwidth-bound on Apple Silicon. Prefer mixture-of-experts; dense models above ~14B get slow fast.</p></div></div>
+      <div class="lesson"><div><b>The serving layer is part of the model.</b><p>Identical weights failed on one runtime and ran clean on two others. Test the pair, never the model alone.</p></div></div>
+      <div class="lesson"><div><b>Orchestrator judges; locals draft.</b><p>A frontier model as the quality ceiling, local models doing the volume. The judge is where quality is decided.</p></div></div>
+      <div class="lesson"><div><b>Never accept "done" without tracing it.</b><p>Models have claimed passing exit codes that never happened. Polish is not a correctness signal — verify by running, every time.</p></div></div>
+      <div class="lesson"><div><b>Measure on real tasks, not benchmarks.</b><p>Every keeper decision here came from a fixed task with a judge and a rubric — or from a real production job — never from a leaderboard.</p></div></div>
+      <div class="lesson"><div><b>Roles over a model zoo.</b><p>Named seats with defined jobs and a single source of truth, so adding a model is a roster decision with a test gate, not an accumulation.</p></div></div>
+      <div class="lesson"><div><b>Retract in writing.</b><p>When a finding turns out wrong, it gets corrected in the same file with the reason. The record is the asset.</p></div></div>
+    </div>
+  </section>
+
+  <footer>
+    <div>Melbourne, Australia · Building in public</div>
+    <div class="links">
+      <a href="https://github.com/wils-co">GITHUB</a>
+      <a href="https://x.com/wilsco_">X</a>
+      <a href="/">WILSCO.AU</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
