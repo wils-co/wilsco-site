@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wilsco — agent-os: local multi-agent fleet control</title>
+<meta name="description" content="A local-first multi-agent operating layer on Apple Silicon. Frontier models as orchestrators, resident local models as workers, and a plain markdown vault as memory.">
+<meta property="og:title" content="Wilsco — agent-os: local multi-agent fleet control">
+<meta property="og:description" content="A local-first multi-agent operating layer on Apple Silicon. Code, architecture, and principles.">
+<meta property="og:url" content="https://wilsco.au/work/agent-os/">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f7f4ee;
+    --ink: #201d18;
+    --ink-60: rgba(32,29,24,0.62);
+    --ink-40: rgba(32,29,24,0.42);
+    --ink-15: rgba(32,29,24,0.15);
+    --ink-08: rgba(32,29,24,0.08);
+    --gold: #b97f34;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: var(--gold); }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 28px; }
+
+  /* header */
+  header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 36px 0 0;
+  }
+  .mark { font-family: var(--serif); font-size: 25px; }
+  .mark a:hover { color: var(--ink); }
+  nav { display: flex; gap: 30px; }
+  nav a { font-size: 11px; letter-spacing: 0.18em; color: var(--ink-40); }
+
+  /* hero */
+  .hero { padding: 88px 0 48px; }
+  .kicker {
+    font-size: 11px; letter-spacing: 0.22em; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 22px;
+  }
+  h1 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(40px, 6vw, 68px); line-height: 1.08;
+    text-wrap: balance; margin-bottom: 20px;
+  }
+  h1 em { font-style: italic; color: var(--gold); }
+  .lede { max-width: 640px; color: var(--ink-60); font-size: 16px; }
+
+  /* stats / metadata strip */
+  .stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    border-top: 1px solid var(--ink-15); border-bottom: 1px solid var(--ink-15);
+    margin: 32px 0 0;
+  }
+  .stat { padding: 22px 20px 22px 0; }
+  .stat + .stat { padding-left: 20px; border-left: 1px solid var(--ink-08); }
+  .stat b { display: block; font-family: var(--serif); font-weight: 400; font-size: 26px; line-height: 1.2; }
+  .stat span { font-size: 11px; letter-spacing: 0.14em; color: var(--ink-40); text-transform: uppercase; }
+
+  /* sections */
+  section { padding: 64px 0 0; }
+  .sec-label {
+    font-size: 11px; letter-spacing: 0.22em; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 16px;
+  }
+  h2 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(28px, 3.8vw, 38px); line-height: 1.2;
+    margin-bottom: 20px; text-wrap: balance;
+  }
+  h2 em { font-style: italic; color: var(--gold); }
+  .prose { max-width: 680px; color: var(--ink-60); }
+  .prose p + p { margin-top: 16px; }
+  .prose strong { color: var(--ink); font-weight: 500; }
+  .prose ul { margin: 16px 0 16px 20px; }
+  .prose li { margin-bottom: 8px; }
+
+  /* code block */
+  pre {
+    background: rgba(32,29,24,0.04);
+    border: 1px solid var(--ink-15);
+    padding: 18px 22px;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 24px 0;
+  }
+
+  /* cta */
+  .cta-bar {
+    display: flex; gap: 18px; align-items: center; flex-wrap: wrap;
+    margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--ink-15);
+  }
+  .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--ink);
+  }
+  .btn:hover {
+    background: transparent;
+    color: var(--ink);
+  }
+  .link-muted {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-40);
+  }
+
+  /* footer */
+  footer {
+    border-top: 1px solid var(--ink-15);
+    margin-top: 88px; padding: 44px 0 64px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; color: var(--ink-40); letter-spacing: 0.12em;
+    flex-wrap: wrap; gap: 16px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="mark"><a href="https://wilsco.au/">wilsco.</a></div>
+    <nav>
+      <a href="/progress">PROGRESS</a>
+      <a href="https://github.com/wils-co">GITHUB</a>
+      <a href="/llms.txt">LLMS.TXT</a>
+    </nav>
+  </header>
+
+  <main>
+    <article>
+      <div class="hero">
+        <div class="kicker">Work / Proof 01</div>
+        <h1>agent-os: local multi-agent <em>fleet control</em>.</h1>
+        <p class="lede">A local-first operational dashboard and runtime for coordinating concurrent AI seats across Apple Silicon and frontier cloud models.</p>
+        
+        <div class="stats">
+          <div class="stat">
+            <b>Open Source</b>
+            <span>License (MIT)</span>
+          </div>
+          <div class="stat">
+            <b>Python / Async</b>
+            <span>Runtime Engine</span>
+          </div>
+          <div class="stat">
+            <b>Multi-Tier</b>
+            <span>Lineage Diversity</span>
+          </div>
+          <div class="stat">
+            <b>Markdown</b>
+            <span>State & Memory</span>
+          </div>
+        </div>
+      </div>
+
+      <section>
+        <div class="sec-label">The Problem</div>
+        <h2>Single chats fail when running a <em>real fleet</em>.</h2>
+        <div class="prose">
+          <p>Standard AI coding tools assume an interactive, single-model chat loop. When you run multiple models concurrently—frontier orchestrators for high-level judgment, resident local weights for fast iterative execution, and background cron agents—that model collapses.</p>
+          <p>Context gets lost between seats, token spend blows out on routine file operations, and background jobs leave no inspectable audit trail. You end up babysitting every prompt instead of governing an engineering pipeline.</p>
+        </div>
+      </section>
+
+      <section>
+        <div class="sec-label">The Architecture</div>
+        <h2>Frontier brains, <em>local muscle</em>, durable files.</h2>
+        <div class="prose">
+          <p><strong>agent-os</strong> was built as the operational control surface for a Mac Studio M3 Ultra (256GB unified memory) running alongside cloud providers. It enforces a strict architectural contract:</p>
+          <ul>
+            <li><strong>Orchestrator as Judge:</strong> High-reasoning models (Claude, Grok) handle problem decomposition, specification drafting, and final pull-request judgment.</li>
+            <li><strong>Local Weights as Executors:</strong> Dedicated local models (Qwen 3.8 27B on Ollama, oMLX) implement bounded unit files and run test suites directly on disk with zero metered API cost.</li>
+            <li><strong>Markdown Vault as State:</strong> No proprietary vector databases or volatile agent memories. Persistent state lives in human-readable markdown files, structured handoff specs, and kanban boards.</li>
+            <li><strong>Maker-Checker Reviews:</strong> The model authoring code never self-approves. Diffs are evaluated by an independent reviewer seat before merging.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <div class="sec-label">Sanitized Snapshot</div>
+        <h2>Inspectable code without <em>private leaks</em>.</h2>
+        <div class="prose">
+          <p>The public repository is an open-source, sanitized snapshot of the watchtower runtime engine. It includes full UI templates, background task scrapers, session parsers, and synthetic fixture data for local testing.</p>
+          <p>All private telemetry, customer data, personal credentials, and live vault paths are completely stripped. You can clone the repo and launch the demo suite locally in seconds:</p>
+          <pre><code># Clone and run the demo suite
+git clone https://github.com/wils-co/agent-os.git
+cd agent-os
+python3 demo.py
+./start.sh</code></pre>
+        </div>
+      </section>
+
+      <div class="cta-bar">
+        <a class="btn" href="https://github.com/wils-co/agent-os" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+        <a class="link-muted" href="/progress">← Back to Progress Essay</a>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <div>Wilson &middot; Melbourne, AU</div>
+    <div>Curiosity, compounding.</div>
+  </footer>
+</div>
+</body>
+</html>

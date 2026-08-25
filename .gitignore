@@ -5,3 +5,5 @@ deploy/
 *.dc.html
 wilsco - Curiosity Compounding.html
 support.js
+.vercel
+.env*

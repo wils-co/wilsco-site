@@ -26,7 +26,7 @@ A credible transition into AI engineering evidenced through working systems, rea
 | Hermes | Active | Independent agent colleague — own loop, tools, memory; terminal or Telegram |
 | agent-os | v8.1, in progress | Fleet-control dashboard across 10 engines with a nightly self-audit that has caught real faults |
 | Second brain | Ongoing system | Markdown vault with human-vs-AI provenance; shared storage, not shared memory |
-| Household CFO | In production | Local categorisation engine with golden-replay tests; doubles as a model-reliability harness |
+| Householdoor | In production | Local categorisation engine with golden-replay tests; doubles as a model-reliability harness |
 | Open practice of learning | Living | Distilled topic notes, stack-fit decision cards, recurring audits — the source this page is curated from |
 
 ## Measured, not assumed

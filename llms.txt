@@ -1,0 +1,17 @@
+# wilsco.au
+
+Wilson (Wilsco). Melbourne, AU.
+Public reposition: sales → AI engineering (~18 months from mid-2026).
+Tagline: Curiosity, compounding.
+
+What I build: local multi-agent systems on Apple Silicon (Mac Studio).
+Frontier model as orchestrator; local models as workers; markdown vault as memory.
+
+Evidence:
+- https://wilsco.au/progress
+- https://github.com/wils-co
+- https://github.com/wils-co/agent-os   # once live
+
+Principles: reliability > speed > size; active params not total; serving layer is part of the model; retract in writing.
+
+Not: courses, consulting landing, Synnex as the headline.
