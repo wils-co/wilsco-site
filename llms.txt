@@ -10,7 +10,7 @@ Frontier model as orchestrator; local models as workers; markdown vault as memor
 Evidence:
 - https://wilsco.au/progress
 - https://github.com/wils-co
-- https://github.com/wils-co/agent-os   # once live
+- https://github.com/wils-co/agent-os
 
 Principles: reliability > speed > size; active params not total; serving layer is part of the model; retract in writing.
 
