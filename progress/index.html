@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Wilsco — Progress: the first seven weeks</title>
-<meta name="description" content="Seven weeks from a new Mac Studio to a measured, multi-agent local AI stack. A progress report from a public journey from sales into AI engineering.">
-<meta property="og:title" content="Wilsco — Progress: the first seven weeks">
-<meta property="og:description" content="Mid-June to 8 August 2026: what got built, what got measured, and what failed in useful ways.">
+<title>Wilsco · Progress: fourteen weeks in</title>
+<meta name="description" content="Fourteen weeks from a new Mac Studio to a tested multi-agent stack, a dental practice website, and a read-only trading desk. A progress report from a public move from sales into AI engineering.">
+<meta property="og:title" content="Wilsco · Progress: fourteen weeks in">
+<meta property="og:description" content="Mid-June to 24 September 2026: what I built, what I measured, and what broke along the way.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -45,6 +45,7 @@
   .mark a:hover { color: var(--ink); }
   nav { display: flex; gap: 30px; }
   nav a { font-size: 11px; letter-spacing: 0.18em; color: var(--ink-40); }
+  nav a.active { color: var(--ink); font-weight: 500; }
 
   /* hero */
   .hero { padding: 96px 0 64px; }
@@ -159,15 +160,17 @@
   <header>
     <div class="mark"><a href="/">wilsco.</a></div>
     <nav>
+      <a href="/progress/" class="active">PROGRESS</a>
+      <a href="/trade/">TRADE</a>
       <a href="https://github.com/wils-co">GITHUB ↗</a>
       <a href="https://x.com/wilsco_">X ↗</a>
     </nav>
   </header>
 
   <div class="hero">
-    <div class="kicker">Progress report · Mid-June — 8 August 2026</div>
-    <h1>Seven weeks in. <em>Curiosity, compounding.</em></h1>
-    <p class="lede">In mid-June 2026 a Mac Studio arrived and a public repositioning began: from a sales career into AI engineering, documented in the open. This is what seven weeks of evenings and weekends actually produced — measured, shipped, and honestly logged, including the failures.</p>
+    <div class="kicker">Progress report · Mid-June to 24 September 2026</div>
+    <h1>Fourteen weeks in. <em>Curiosity, compounding.</em></h1>
+    <p class="lede">In mid-June 2026 a Mac Studio arrived and I started a public move from a sales career into AI engineering. This page is what fourteen weeks of evenings and weekends has actually produced, including the parts that broke.</p>
   </div>
 
   <div class="stats">
@@ -181,8 +184,8 @@
     <div class="sec-label">The goal</div>
     <h2>Work over resume, on an <em>18-month</em> clock.</h2>
     <div class="prose">
-      <p>The aim is a credible transition into AI engineering over roughly eighteen months — evidenced publicly through working systems, real measurements, and decision records, not job titles. The machine is a Mac Studio M3 Ultra with 256 GB of unified memory, chosen for one reason: single-user decode speed on Apple Silicon is memory-bandwidth-bound, so mixture-of-experts models with small <em>active</em> parameter counts give big-model quality at small-model speed, and 256 GB holds several different model families resident at once.</p>
-      <p>Everything below was self-taught along the way: Git and GitHub, the command line, Python environment management, launchd automation, model serving, and agent orchestration — starting from sales, not software.</p>
+      <p>I'm aiming to move into AI engineering over about eighteen months, and I want the evidence to be public: working systems, real measurements and written-down decisions rather than a job title. The machine is a Mac Studio M3 Ultra with 256 GB of unified memory. I chose it for one reason. On Apple Silicon, single-user decode speed is limited by memory bandwidth, so mixture-of-experts models, which only use a small number of <em>active</em> parameters for each token, give you big-model quality at small-model speed. And 256 GB is enough to keep several different model families loaded at once.</p>
+      <p>I taught myself everything below as I went: Git and GitHub, the command line, Python environments, launchd automation, model serving and agent orchestration. I came to this from sales, not software.</p>
     </div>
   </section>
 
@@ -195,51 +198,130 @@
       <div class="t-entry">
         <div class="t-date">Mid–late June 2026</div>
         <h3>Arrival and first automations</h3>
-        <p>The Studio lands. First projects within days: scheduled data pipelines on launchd, a personal mission-control dashboard, a curriculum-aligned learning platform scaffold for the kids (Khaizen), and the first local inference experiments. Most of this era's code was later superseded — which is the point of keeping it.</p>
+        <p>The Studio arrived and I had projects running within days: scheduled data pipelines on launchd, a personal mission-control dashboard, a curriculum-aligned learning platform scaffold for my kids (Khaizen), and my first local inference experiments. Most of that code has since been replaced. I keep it anyway, because it shows where I started.</p>
       </div>
 
       <div class="t-entry">
         <div class="t-date">5–7 July 2026</div>
         <h3>The second brain, and the first principle written down</h3>
-        <p>A plain-markdown PARA vault becomes the shared memory for every agent on the machine — git-tracked, with a strict provenance convention separating human thought from AI-written content. The stack's core principle is recorded: <strong>active parameters, not total parameters</strong>, set throughput. First real A/B follows immediately: two models tested on an actual task (editing a file per written conventions); the slower model followed instructions reliably and won the default slot. Same stretch: built the session-summariser that now feeds this page's source notes — then disabled its automatic end-of-session trigger after it fired on the wrong signal (see What failed).</p>
+        <p>I set up a plain-markdown vault, organised with PARA, as shared memory for every agent on the machine. It's tracked in git, and every file records whether a human or an AI wrote it. I also wrote down the principle the whole stack rests on: <strong>active parameters, not total parameters</strong>, set the speed. The first real A/B test came straight after. I gave two models an actual task, editing a file according to written conventions. The slower one followed the instructions properly, so it got the default slot. In the same stretch I built the session summariser that now feeds this page, then switched off its automatic end-of-session trigger after it fired on the wrong signal (more on that under What failed).</p>
       </div>
 
       <div class="t-entry">
         <div class="t-date">8–10 July 2026</div>
         <h3>Root causes, not workarounds</h3>
-        <p>A hard crash in agentic loops is traced to a landmine in a stock chat template and patched at the template level. Then a bigger find: a model that failed in one serving runtime ran cleanly on two others — same weights. <strong>The serving layer is part of the system.</strong> A fixed-task, 100-point eval series across nine configurations lands the keeper setup: a frontier orchestrator delegating to a local worker scored 100/100 — but only when the worker was served by the right engine.</p>
+        <p>I traced a hard crash in agent loops to a landmine in a stock chat template and fixed it in the template itself. Then a bigger find: a model that failed in one serving runtime ran cleanly in two others, with exactly the same weights. <strong>The serving layer is part of the system.</strong> A fixed-task eval series, scored out of 100 across nine configurations, settled my setup. A frontier orchestrator handing work to a local worker scored 100/100, but only when the worker ran on the right engine.</p>
       </div>
 
       <div class="t-entry">
         <div class="t-date">Mid-July 2026</div>
         <h3>Real workloads move local</h3>
-        <p>A household finance workflow migrates out of a cloud chat product into a local pipeline: a rules-as-markdown categorisation engine with a locked match order and golden-replay tests, plus a React dashboard. First run on real monthly data lands at ~72% auto-categorised; iterated against the actual failures, not synthetic ones, to 100% auto across 190 unique transactions for that close (one-offs folded into rules; later months still expected to leave judgment cases). Verification becomes a two-model ritual — one agent designs falsifiable tests, another executes them, and neither is trusted alone. A first stack audit goes on record, and the team roster gets a single source of truth with named seats, engine rules, and a change log.</p>
+        <p>I moved my household finance workflow off a cloud chat product and onto a local pipeline. It's a categorisation engine whose rules live in markdown, with a fixed match order, golden-replay tests and a React dashboard. The first run on a real month's data categorised about 72% automatically. I worked through the actual failures rather than made-up ones until that month's close hit 100% across 190 unique transactions. One-offs got folded into rules, and I still expect later months to need some judgment calls.</p>
+        <p>Checking became a two-model routine: one agent writes tests that could genuinely fail, another runs them, and I don't trust either on its own. I also did my first stack audit and gave the agent roster a single source of truth, with named seats, engine rules and a change log.</p>
       </div>
 
       <div class="t-entry">
         <div class="t-date">23–28 July 2026</div>
-        <h3>The eval gauntlet — and honest failure logs</h3>
-        <p>A week of purpose-built harnesses (game-generation rigs with real syntax gates, scope-locked workspaces, judge-verified drills) surfaces the local tier's true failure modes: polished code with fatal one-character bugs, models claiming success without calling a single tool, rewrite spirals on trivial tasks. Two findings are publicly retracted in the same file when re-testing proved them wrong — the methodology was the bug, not the model.</p>
-        <p>The week ends with a task-grounded bake-off on a real production job: every model that actually ran the pipeline converged on the identical correct answer, but local models fumbled execution and delivery in three distinct ways while API models went clean first try. Conclusion recorded with its caveats attached, not hardened into dogma.</p>
+        <h3>The eval gauntlet, and honest failure logs</h3>
+        <p>I spent a week building test rigs: game-generation setups with real syntax checks, workspaces locked to a scope, and drills marked by a judge. They showed how the local models really fail. Polished code with a fatal one-character bug. Models claiming success without calling a single tool. Rewrite spirals on trivial tasks. I also retracted two findings publicly, in the same file, when re-testing showed my test method was the problem rather than the model.</p>
+        <p>The week ended with a bake-off on a real production job. Every model that actually ran the pipeline reached the same correct answer, but the local models fumbled running or delivering it in three different ways, while the API models got it right first time. I wrote that conclusion down with its caveats attached and didn't turn it into a rule.</p>
       </div>
 
       <div class="t-entry">
         <div class="t-date">26–31 July 2026</div>
-        <h3><a href="/work/agent-os/" style="text-decoration: underline; text-underline-offset: 3px;">agent-os</a>: the fleet gets an operability surface</h3>
-        <p>A single-file dashboard — stdlib Python backend, one HTML file — that reads every engine's on-disk state and answers the morning-glance questions in under two minutes: who's live, what's burning resources, where's the handoff. Built from v1 to v8.1 in six days by a multi-agent team with an explicit authorship map. It discovers engines dynamically rather than trusting a whitelist — and promptly found more running profiles than the documentation claimed, plus real bugs in the stack it observes: a stale state file, a broken scheduled delivery, a timezone bug hiding half a day of usage data.</p>
+        <h3><a href="/work/agent-os/" style="text-decoration: underline; text-underline-offset: 3px;">agent-os</a>: one screen for the whole fleet</h3>
+        <p>A single-file dashboard, with a plain Python backend and one HTML file, that reads every engine's state from disk and answers my morning questions in under two minutes: who's running, what's using resources, and where the handoffs are. A team of agents took it from v1 to v8.1 in six days, and I kept a map of who wrote what.</p>
+        <p>It finds engines by itself instead of trusting a list, and straight away it found more running profiles than my docs said existed. It also caught real bugs in the stack it watches: a stale state file, a broken scheduled delivery, and a timezone bug that was hiding half a day of usage data.</p>
       </div>
 
       <div class="t-entry">
         <div class="t-date">30–31 July 2026</div>
         <h3>Decisions become a pipeline</h3>
-        <p>A repeatable "should I adopt this?" system ships: every candidate tool gets a structured brief — the gap it closes, what it collides with, the smallest honest experiment, and a verdict of adopt, trial, park, or skip — with a lifecycle and an auto-generated index. Nine verdicts on record in the first two days, with a standing rule of at most two things in trial at once.</p>
+        <p>I built a repeatable way to answer "should I adopt this?". Every candidate tool gets a short brief: the gap it fills, what it clashes with, the smallest honest experiment, and a verdict of adopt, trial, park or skip. Briefs have a lifecycle and an index that builds itself. I had nine verdicts in the first two days, and a standing rule that no more than two things are on trial at once.</p>
       </div>
 
       <div class="t-entry">
         <div class="t-date">1–8 August 2026</div>
         <h3>Testing the fleet instead of trusting it</h3>
-        <p>The identical real job — pull two YouTube transcripts, distill into an HTML page — run on three model seats in parallel: a fast, free, cloud-routed model finishes with a complete artifact; a slower local model needs a manual nudge past its own iteration cap; a third fails three tool calls (including a syntax error) and delivers nothing. The winning output isn't taken at its word — speaker lines and headline quotes checked against an independent transcript; a stack-speed claim in the same page did not survive that check.</p>
-        <p>Separately, a two-week-old "can't be trusted with stateful code" verdict on a local model gets re-tested instead of carried forward. Mechanical probes reverse the hard deny to conditional: two July-failing game builds pass in August. Paired with a stronger reasoning model as its planner, the same model then clears a task class it died on solo in July. One stubborn failure along the way is a permission-grammar bug blocking file access, not a capability gap — found and fixed.</p>
+        <p>I ran the same real job on three model seats at once: pull two YouTube transcripts and distill them into an HTML page. A fast, free, cloud-routed model finished with a complete page. A slower local model needed a manual nudge past its own iteration limit. The third failed three tool calls, one of them a syntax error, and delivered nothing. I didn't take the winner at its word either. I checked its speaker lines and headline quotes against a separate transcript, and one claim about my own stack's speed didn't survive.</p>
+        <p>Separately, I re-tested a two-week-old verdict that a local model couldn't be trusted with stateful code, instead of just carrying it forward. Mechanical probes turned the hard no into a conditional yes: two game builds that failed in July passed in August. Paired with a stronger reasoning model as its planner, the same model then handled a kind of task it had died on alone in July. One stubborn failure along the way turned out to be a permission-grammar bug blocking file access, not a lack of ability. I found it and fixed it.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">9–18 August 2026</div>
+        <h3>A research pipeline that files its own notes</h3>
+        <p>I read a lot of X threads and YouTube videos about AI tooling, and most of it used to vanish into bookmarks. Now there's a distill button on my dashboard. It sends a post or transcript to a free cloud model and files a structured page into my notes library. From 12 August a second loop grades those pages against a rubric and flags the thin ones for another pass. To choose the model for the heavier synthesis work, I ran the same messy 30,000-token bundle through three candidates and compared what came back.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">13–22 August 2026</div>
+        <h3>New models had to earn their seats</h3>
+        <p>Two big model releases landed in the same week. I ran the same hard prompt through the old and new versions. Both passed and the new ones were a little more polished, so I changed a default and left the architecture alone. A dense 27B coding model won the careful-worker seat after head-to-head runs from 15 to 17 August. On 21 August I swapped the local 35B seat to a new build and retired a relay that had been quietly routing its thinking through a cloud model. The same week produced a reusable eval skill, so the next model swap is a command I run rather than a small project.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">18–25 August 2026</div>
+        <h3>Building the place this page lives</h3>
+        <p>I made the first commit of this site on 18 August. On the 21st I put Cloudflare in front of wilsco.au, so one domain now serves the landing page, this report and tunnels back to the Studio. The same day I wrote a candid review of my public presence against the 18-month goal. An llms.txt file and a proper agent-os page followed on the 25th.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">21–25 August 2026</div>
+        <h3><a href="/work/agent-os/" style="text-decoration: underline; text-underline-offset: 3px;">agent-os</a> goes open source</h3>
+        <p>I moved the routing policy into one file that says which seat does which job. The seats got little avatars on the dashboard, which helps more than it sounds when you're scanning ten of them. I hardened the server with an explicit route list, capped caches and authenticated writes, then open-sourced it. Stripping personal details out of the public copy took three passes, because the first two kept missing things.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">25–28 August 2026</div>
+        <h3>Trading, starting with a rule</h3>
+        <p>Before I built any trading tools I wrote one rule down: the model never places orders. It can write specs, review my journal and point out anything odd. A plain, deterministic risk engine sits between any idea and any exchange, and it has the final veto. On 28 August I built a read-only market desk on that rule, and everything I've built for trading since has kept to it.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">26 August 2026</div>
+        <h3>Six weeks, boiled down</h3>
+        <p>By late August I had six weeks of raw session logs and kept relearning the same lessons. So I condensed them into four reference notes: why local speed numbers so often don't hold up, a runbook of every gateway and tunnel failure that had already cost me an evening, the common serving pitfalls, and a map of which instruction files each coding agent actually reads. They don't all read the same files, and that difference had caused real bugs.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">27 August – 5 September 2026</div>
+        <h3>A real website for a real practice</h3>
+        <p>My wife Julia is a dentist, and we're setting up her practice, Smiles by Design in Wheelers Hill. I look after the digital side. It started with a homepage prototype, a tooth-anatomy explainer, a look at a competitor's site and a catchment analysis. On 3 and 4 September it became a proper 14-page site: copy for eight treatments, a local SEO pack, an icon set, and then a restyle into something quieter and more boutique with a little scroll motion.</p>
+        <p>Every treatment page went through a pass against Australia's rules for health advertising. That means no outcome testimonials, no "guaranteed" or "best", and no before-and-after galleries that suggest a typical result. The site was deployed on the 5th, and <a href="https://github.com/wils-co/jaws-dental-practice" style="text-decoration: underline; text-underline-offset: 3px;">the code is public</a>.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">8–11 September 2026</div>
+        <h3>One brief, three models, three answers</h3>
+        <p>Then I got distracted in a good way. I pulled apart bunqlabs.com, a site with beautiful WebGL motion, and noticed it draws all its text inside the canvas and leaves Google a few hidden lines. I wanted that polish without giving up real, crawlable text. So I gave the same brief to three agents from three different model families and let each one build a hero for the practice site.</p>
+        <p>agy (Gemini) made a night-time fluid simulation with the headline refracted through it. Claude Code made a pinned stage of 69,000 particles with real HTML text sitting on top. Grok Build started on a pale limestone bench and faded to night as a veneer dissolved into a point cloud. Same brief, three quite different tastes, which is exactly why I keep more than one model family around. On the 11th I put together a hands-on course covering the whole pipeline, right down to rendering in Blender on the Studio's GPU with no window open.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">5–13 September 2026</div>
+        <h3><a href="https://github.com/wils-co/liq-tape" style="text-decoration: underline; text-underline-offset: 3px;">liq-tape</a>: a dashboard for reading liquidity</h3>
+        <p>This started with an X thread about "liquidity grabs" and a simple question: is there anything real under the hype? US CPI came out that week and answered it live. ETH jumped more than $150 in under an hour as $215M of short positions were liquidated one after another, then gave most of it back. BTC swept its early-month lows, reclaimed them, ran and reversed. Both moves showed up clearly in the positioning data as they happened. What the data couldn't show me was intent, at least not until afterwards.</p>
+        <p>I turned that into a written framework and then into liq-tape, a read-only dashboard with open interest, order-book depth, funding and my own hand-drawn price levels on one screen. Hyperliquid doesn't keep open-interest history, so a small sampler on the Studio polls it every twelve seconds and builds its own. Every hour it runs is data I couldn't get back later. The rule is that it shows data and never gives signals: no alerts, no auto-detection, no orders, and CI checks enforce that. Review cut the first spec from seven panels to four and caught two things I'd assumed wrongly. Hyperliquid has no public liquidation feed, and the heatmap API I planned to use costs money. Six PRs went in over two days, each one reviewed before merging. At one point branch protection blocked my own merge because a rule named a check wrongly. Annoying, and exactly what I'd set it up to do.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">14–17 September 2026</div>
+        <h3>More layers on the board</h3>
+        <p>Six more PRs: order-book walls and sampled CVD, a one-screen time-by-price view, a liquidation map rebuilt from the positions of the 200 largest accounts, a view of which liquidation clusters have already been swept, a live trade feed over websocket, and trade markers you can read without colour. I'm red-green colourblind, so that last one mattered to me. Old samples are archived after ten days, never deleted, and I can open the board from anywhere behind a login.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">17–24 September 2026</div>
+        <h3>Taking the desk to my phone</h3>
+        <p>The board is great at a desk and useless on a phone. So I added a Telegram command: type "tape eth" and you get a one-screen summary built from the local board, with no calls out to the exchange and almost no cost. Everything uses arrows and plus/minus signs instead of red and green.</p>
+        <p>I also tested my own take-profit habit, where I anchor Fibonacci levels on candle bodies, against 1,000 bars of SOL on three timeframes. Price came back to the midline about 83–88% of the time and retraced fully about half the time. Useful context, but not a signal.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">18–24 September 2026</div>
+        <h3>The paper book, published in R</h3>
+        <p>The desk grew into a paper-trading harness. Every trade is a ticket with a stop, sized from a fixed risk budget and checked by hard rules: a per-trade risk cap, a daily loss cap, a leverage cap and a drawdown kill switch. Each trade is tagged with its setup and closed at a real price.</p>
+        <p>On 24 September the journal started publishing itself. One command updates <a href="/trade/" style="text-decoration: underline; text-underline-offset: 3px;">the trading page on this site</a> and a <a href="https://github.com/wils-co/agent-trade-harness/blob/main/TRADES.md" style="text-decoration: underline; text-underline-offset: 3px;">ledger on GitHub</a>, both in R, meaning profit or loss per unit of risk, after modelled fees and funding. Dollar amounts and my balance stay on my machine. After the first four closed trades it's +5.38R: three wins and one loss of −1.11R. That's four trades. No setup counts as an edge until it has thirty, and these are paper trades. The harness can't place real orders.</p>
       </div>
 
     </div>
@@ -252,33 +334,53 @@
       <div class="card">
         <div class="tag">Active practice</div>
         <h3>Local agent team</h3>
-        <p>Named seats on defined engines: a frontier orchestrator that judges and delegates, local workers that draft and execute, and hard serving rules earned through testing. Roles over a model zoo.</p>
+        <p>Named seats on defined engines. A frontier orchestrator judges and hands out work, local models draft and execute, and the serving rules came from testing. Every model has a job.</p>
       </div>
       <div class="card">
         <div class="tag">Active</div>
         <h3>Hermes</h3>
-        <p>An independent agent colleague with its own loop, tools, and memory — reachable in the terminal or over Telegram when away from the machine. Levelled as a peer, not a thin bot.</p>
+        <p>An agent colleague with its own loop, tools and memory. I reach it in the terminal, or over Telegram when I'm away from the machine, and I'm building it up as a peer rather than a thin bot.</p>
       </div>
       <div class="card">
         <div class="tag">v8.1 · open source</div>
         <h3><a href="/work/agent-os/">agent-os →</a></h3>
-        <p>Fleet-control dashboard reading live state across ten engines: activity ticker, token usage, session viewer, project board, and a nightly self-audit job that has caught real faults.</p>
-        <p style="margin-top: 12px;"><a href="/work/agent-os/" style="color: var(--gold); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;">View project & architecture →</a></p>
+        <p>A dashboard that reads live state across ten engines: activity feed, token usage, session viewer, project board, and a nightly self-audit that has caught real faults.</p>
+        <p style="margin-top: 12px;"><a href="/work/agent-os/" style="color: var(--gold); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;">View project &amp; architecture →</a></p>
       </div>
       <div class="card">
         <div class="tag">Ongoing system</div>
         <h3>Second brain</h3>
-        <p>A markdown vault every agent can read and write, with human-versus-AI provenance on every file. Storage is shared; each reader pays its own context cost — and the distinction matters.</p>
+        <p>A markdown vault every agent can read and write, with a note on every file of whether a human or an AI wrote it. The storage is shared, but each agent pays its own cost to read it, and that difference matters.</p>
       </div>
       <div class="card">
         <div class="tag">In production</div>
         <h3>Householdoor</h3>
-        <p>A local categorisation engine with rules-as-markdown, golden-replay tests, and a dashboard — migrated off a cloud chat product, now doubling as a bake-off harness for model reliability.</p>
+        <p>The local categorisation engine, with rules in markdown, golden-replay tests and a dashboard. I moved it off a cloud chat product, and it now doubles as a test bench for model reliability.</p>
       </div>
       <div class="card">
         <div class="tag">Living</div>
         <h3>Open practice of learning</h3>
-        <p>Distilled topic notes, stack-fit decision cards, and recurring audits — the source this page is curated from.</p>
+        <p>Distilled topic notes, stack-fit decision cards and regular audits. This page is curated from them.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Live build</div>
+        <h3>Smiles by Design</h3>
+        <p>Julia's practice site: 14 pages, copy checked against health-advertising rules, and three motion prototypes on the bench.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Public repo</div>
+        <h3><a href="https://github.com/wils-co/liq-tape">liq-tape →</a></h3>
+        <p>My read-only liquidity dashboard. It shows the data and leaves the decisions to me, and CI blocks anything that looks like a signal.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Paper · public ledger</div>
+        <h3><a href="/trade/">Trading desk →</a></h3>
+        <p>Paper trading with hard risk limits. The journal publishes itself in R, and dollar figures never reach the repo.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Active</div>
+        <h3>Research pipeline</h3>
+        <p>One click turns a post or video into a filed note, and a second loop checks the work.</p>
       </div>
     </div>
   </section>
@@ -286,7 +388,7 @@
   <section id="measured">
     <div class="sec-label">Measured, not assumed</div>
     <h2>Numbers from <em>real</em> tasks.</h2>
-    <p class="prose">Decode speed on this machine, measured per model — the table that justifies the mixture-of-experts-first policy. Active parameters (the <span class="num">a4b</span> / <span class="num">a3b</span> suffixes) set the speed, not total size.</p>
+    <p class="prose">Decode speed on this machine, measured per model. This table is why I prefer mixture-of-experts models: the active parameters (the <span class="num">a4b</span> / <span class="num">a3b</span> in the names) set the speed, not the total size.</p>
     <div class="tbl-wrap">
       <table>
         <thead>
@@ -302,7 +404,7 @@
       </table>
     </div>
     <div class="prose" style="margin-top:28px">
-      <p>Other results on record: a 100/100 orchestrator-plus-local-worker score on a fixed judged task; a three-model tie at 100% on pure tool-calling mechanics (the reliability gap lives elsewhere); a 156 GB frontier-class local model that passed a production gate exactly — then benchmarked at ≈7.5 tok/s and was honestly filed as "background jobs only"; and a free, cloud-routed seat that outdelivered two local seats on an identical real task — quotes and speakers checked against an independent transcript; one stack claim in that page did not.</p>
+      <p>Other results on record: 100/100 for a frontier orchestrator plus a local worker on a fixed, judged task. A three-way tie at 100% on pure tool-calling mechanics, which tells me the reliability gap is somewhere else. A 156 GB frontier-class local model that passed a production gate exactly, then ran at about 7.5 tok/s, so I filed it as "background jobs only". And a free, cloud-routed seat that did better than two local seats on the same real task. I checked its quotes and speakers against a separate transcript, and one claim about my stack in that page didn't hold.</p>
     </div>
   </section>
 
@@ -310,8 +412,10 @@
     <div class="sec-label">What failed</div>
     <h2>The failures are the <em>curriculum</em>.</h2>
     <div class="prose">
-      <p>Building in public means logging what broke, because that is where the learning compressed. A session-summary hook fired twenty times in two minutes and polluted its own dataset — then, run on its own build log, showed a self-referential misread and a truncation bug that dropped the first ~24,000 characters of long transcripts. The most polished code repeatedly hid the most severe bugs — including a local function that shadowed a JavaScript built-in and recursed infinitely on first click. One model verbally committed to a task across four turns without ever calling a tool. Well-hedged advice from a credible source made results measurably worse here, because it came from a different serving stack. Stateful single-file app generation was gated <strong>closed</strong> for the local tier in late July; August re-tests moved that class to <strong>conditional</strong> (run-verify before ship), in writing, in the same record.</p>
-      <p>And twice in one day, findings already written down were retracted in place when re-testing showed the test method — not the model — was at fault. The record stays honest or it is worthless.</p>
+      <p>Building in public means writing down what broke, because that's where most of the learning happened. A session-summary hook fired twenty times in two minutes and polluted its own data. When I ran it on its own build log, it misread itself and exposed a truncation bug that dropped the first 24,000 or so characters of long transcripts. The most polished code kept hiding the worst bugs, including a local function that shadowed a JavaScript built-in and recursed forever on the first click. One model promised to do a task across four turns and never called a tool. Sensible, well-hedged advice from a credible source made my results measurably worse, because it came from a different serving stack. In late July I marked stateful single-file app builds as <strong>closed</strong> for the local models. August re-tests moved them to <strong>conditional</strong>, meaning run it and verify before shipping, and I recorded the change in the same file.</p>
+      <p>Twice in one day I retracted findings I'd already written down, because re-testing showed the test method was at fault rather than the model. If the record isn't honest, it's worthless.</p>
+      <p>Late August and September had their share too. Two agents edited two different copies of the practice site on the same day, and three pairs of files quietly drifted apart. I fixed it by making the repo the only place anything gets edited. The copy I read on my phone is now generated from it, with a do-not-edit banner and a check that fails if they drift.</p>
+      <p>A draft spec for liq-tape assumed a live liquidation feed that doesn't exist. If review hadn't caught it, the main panel would have shown guesses dressed up as data. My drawdown figure was divided by current equity instead of the previous peak, so it looked worse exactly when I was losing and better once I'd recovered. It now measures how far I am below the high-water mark. And going public took more than one try: the agent-os snapshot needed a third cleaning pass, and the trading repo's first push left my account size readable in a config file and a test. Those values now stay on my machine.</p>
     </div>
   </section>
 
@@ -319,14 +423,17 @@
     <div class="sec-label">How I work</div>
     <h2>Principles, earned the <em>slow</em> way.</h2>
     <div class="lessons">
-      <div class="lesson"><div><b>Reliability &gt; speed &gt; size.</b><p>A fast model that malforms tool calls is useless in an agent loop. A broken free worker costs more than no worker (~2.4× once recovery is counted).</p></div></div>
-      <div class="lesson"><div><b>Active params, not total params.</b><p>Single-stream decode is memory-bandwidth-bound on Apple Silicon. Prefer mixture-of-experts; dense models above ~14B get slow fast.</p></div></div>
-      <div class="lesson"><div><b>The serving layer is part of the model.</b><p>Identical weights failed on one runtime and ran clean on two others. Test the pair, never the model alone.</p></div></div>
-      <div class="lesson"><div><b>Orchestrator judges; locals draft.</b><p>A frontier model as the quality ceiling, local models doing the volume. The judge is where quality is decided.</p></div></div>
-      <div class="lesson"><div><b>Never accept "done" without tracing it.</b><p>Models have claimed passing exit codes that never happened. Polish is not a correctness signal — verify by running, every time.</p></div></div>
-      <div class="lesson"><div><b>Measure on real tasks, not benchmarks.</b><p>Every keeper decision here came from a fixed task with a judge and a rubric — or from a real production job — never from a leaderboard.</p></div></div>
-      <div class="lesson"><div><b>Roles over a model zoo.</b><p>Named seats with defined jobs and a single source of truth, so adding a model is a roster decision with a test gate, not an accumulation.</p></div></div>
-      <div class="lesson"><div><b>Retract in writing.</b><p>When a finding turns out wrong, it gets corrected in the same file with the reason. The record is the asset.</p></div></div>
+      <div class="lesson"><div><b>Reliability beats speed beats size.</b><p>A fast model that mangles tool calls is useless in an agent loop. A broken free worker costs more than having no worker at all, about 2.4 times more once you count the clean-up.</p></div></div>
+      <div class="lesson"><div><b>Active params, not total params.</b><p>On Apple Silicon, single-stream decode is limited by memory bandwidth. I prefer mixture-of-experts models, because dense models above about 14B get slow quickly.</p></div></div>
+      <div class="lesson"><div><b>The serving layer is part of the model.</b><p>The same weights failed on one runtime and ran cleanly on two others. I test the model and runtime together, never the model alone.</p></div></div>
+      <div class="lesson"><div><b>The orchestrator judges, local models draft.</b><p>A frontier model sets the quality ceiling and local models do the volume. Quality gets decided by the judge.</p></div></div>
+      <div class="lesson"><div><b>Never accept &quot;done&quot; without checking.</b><p>Models have claimed passing exit codes that never happened. Polish doesn&#x27;t mean correct, so I run it and look, every time.</p></div></div>
+      <div class="lesson"><div><b>Measure on real tasks.</b><p>Every decision I kept came from a fixed task with a judge and a rubric, or from a real production job. None came from a leaderboard.</p></div></div>
+      <div class="lesson"><div><b>Roles, not a model zoo.</b><p>Named seats with defined jobs and one source of truth. Adding a model is a roster decision with a test to pass, so models don&#x27;t just pile up.</p></div></div>
+      <div class="lesson"><div><b>Retract in writing.</b><p>When a finding turns out wrong, I correct it in the same file and say why. The record is the asset.</p></div></div>
+      <div class="lesson"><div><b>One copy of everything.</b><p>If two copies can both be edited, they&#x27;ll drift. Generate the second one instead.</p></div></div>
+      <div class="lesson"><div><b>The model never places orders.</b><p>It describes and checks. A deterministic rule has the veto, and I make the call.</p></div></div>
+      <div class="lesson"><div><b>Different families, not copies.</b><p>Three model families on one brief gave me three different designs. Three copies of one model would have given me one.</p></div></div>
     </div>
   </section>
 
