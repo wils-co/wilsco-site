@@ -45,6 +45,7 @@
   .mark a:hover { color: var(--ink); }
   nav { display: flex; gap: 30px; }
   nav a { font-size: 11px; letter-spacing: 0.18em; color: var(--ink-40); }
+  nav a.active { color: var(--ink); font-weight: 500; }
 
   /* hero */
   .hero { padding: 96px 0 64px; }
@@ -159,6 +160,8 @@
   <header>
     <div class="mark"><a href="/">wilsco.</a></div>
     <nav>
+      <a href="/progress/" class="active">PROGRESS</a>
+      <a href="/trade/">TRADE</a>
       <a href="https://github.com/wils-co">GITHUB ↗</a>
       <a href="https://x.com/wilsco_">X ↗</a>
     </nav>
@@ -298,7 +301,7 @@
         <div class="t-date">5–13 September 2026</div>
         <h3><a href="https://github.com/wils-co/liq-tape" style="text-decoration: underline; text-underline-offset: 3px;">liq-tape</a>: a dashboard for reading liquidity</h3>
         <p>This started with an X thread about "liquidity grabs" and a simple question: is there anything real under the hype? US CPI came out that week and answered it live. ETH jumped more than $150 in under an hour as $215M of short positions were liquidated one after another, then gave most of it back. BTC swept its early-month lows, reclaimed them, ran and reversed. Both moves showed up clearly in the positioning data as they happened. What the data couldn't show me was intent, at least not until afterwards.</p>
-        <p>I turned that into a written framework and then into liq-tape, a read-only dashboard with open interest, order-book depth, funding and my own hand-drawn price levels on one screen. The rule is that it shows data and never gives signals: no alerts, no auto-detection, no orders, and CI checks enforce that. Review cut the first spec from seven panels to four and caught two things I'd assumed wrongly. Hyperliquid has no public liquidation feed, and the heatmap API I planned to use costs money. Six PRs went in over two days, each one reviewed before merging. At one point branch protection blocked my own merge because a rule named a check wrongly. Annoying, and exactly what I'd set it up to do.</p>
+        <p>I turned that into a written framework and then into liq-tape, a read-only dashboard with open interest, order-book depth, funding and my own hand-drawn price levels on one screen. Hyperliquid doesn't keep open-interest history, so a small sampler on the Studio polls it every twelve seconds and builds its own. Every hour it runs is data I couldn't get back later. The rule is that it shows data and never gives signals: no alerts, no auto-detection, no orders, and CI checks enforce that. Review cut the first spec from seven panels to four and caught two things I'd assumed wrongly. Hyperliquid has no public liquidation feed, and the heatmap API I planned to use costs money. Six PRs went in over two days, each one reviewed before merging. At one point branch protection blocked my own merge because a rule named a check wrongly. Annoying, and exactly what I'd set it up to do.</p>
       </div>
 
       <div class="t-entry">
@@ -318,7 +321,7 @@
         <div class="t-date">18–24 September 2026</div>
         <h3>The paper book, published in R</h3>
         <p>The desk grew into a paper-trading harness. Every trade is a ticket with a stop, sized from a fixed risk budget and checked by hard rules: a per-trade risk cap, a daily loss cap, a leverage cap and a drawdown kill switch. Each trade is tagged with its setup and closed at a real price.</p>
-        <p>On 24 September the journal started publishing itself. One command writes a <a href="https://github.com/wils-co/agent-trade-harness/blob/main/TRADES.md" style="text-decoration: underline; text-underline-offset: 3px;">public ledger</a> and an equity curve in R, meaning profit or loss per unit of risk, after modelled fees and funding. Dollar amounts and my balance stay on my machine. After the first four closed trades it's +5.38R: three wins and one loss of −1.11R. That's four trades. No setup counts as an edge until it has thirty, and these are paper trades. The harness can't place real orders.</p>
+        <p>On 24 September the journal started publishing itself. One command updates <a href="/trade/" style="text-decoration: underline; text-underline-offset: 3px;">the trading page on this site</a> and a <a href="https://github.com/wils-co/agent-trade-harness/blob/main/TRADES.md" style="text-decoration: underline; text-underline-offset: 3px;">ledger on GitHub</a>, both in R, meaning profit or loss per unit of risk, after modelled fees and funding. Dollar amounts and my balance stay on my machine. After the first four closed trades it's +5.38R: three wins and one loss of −1.11R. That's four trades. No setup counts as an edge until it has thirty, and these are paper trades. The harness can't place real orders.</p>
       </div>
 
     </div>
@@ -371,7 +374,7 @@
       </div>
       <div class="card">
         <div class="tag">Paper · public ledger</div>
-        <h3><a href="https://github.com/wils-co/agent-trade-harness">Trade harness →</a></h3>
+        <h3><a href="/trade/">Trading desk →</a></h3>
         <p>Paper trading with hard risk limits. The journal publishes itself in R, and dollar figures never reach the repo.</p>
       </div>
       <div class="card">

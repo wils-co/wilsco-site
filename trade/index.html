@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wilsco · Trading desk</title>
+<meta name="description" content="My paper-trading desk on Hyperliquid perps. Hand-made calls, hard risk limits, and every result published in R rather than dollars.">
+<meta property="og:title" content="Wilsco · Trading desk">
+<meta property="og:description" content="Paper trades on Hyperliquid perps, recorded in R. Nothing counts as an edge until a setup has 30 trades.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f7f4ee;
+    --ink: #201d18;
+    --ink-60: rgba(32,29,24,0.62);
+    --ink-40: rgba(32,29,24,0.42);
+    --ink-15: rgba(32,29,24,0.15);
+    --ink-08: rgba(32,29,24,0.08);
+    --gold: #b97f34;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: var(--gold); }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 28px; }
+
+  /* header */
+  header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 36px 0 0;
+  }
+  .mark { font-family: var(--serif); font-size: 25px; }
+  .mark a:hover { color: var(--ink); }
+  nav { display: flex; gap: 30px; }
+  nav a { font-size: 11px; letter-spacing: 0.18em; color: var(--ink-40); text-transform: uppercase; }
+  nav a.active { color: var(--ink); font-weight: 500; }
+
+  /* hero */
+  .hero { padding: 88px 0 56px; }
+  .kicker {
+    font-size: 11px; letter-spacing: 0.22em; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 22px;
+  }
+  h1 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(38px, 6vw, 68px); line-height: 1.05;
+    text-wrap: balance; margin-bottom: 22px;
+  }
+  h1 em { font-style: italic; color: var(--gold); }
+  .lede { max-width: 640px; color: var(--ink-60); }
+
+  /* stat strip */
+  .stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    border-top: 1px solid var(--ink-15); border-bottom: 1px solid var(--ink-15);
+    margin: 28px 0 0;
+  }
+  .stat { padding: 24px 20px 24px 0; }
+  .stat + .stat { padding-left: 20px; border-left: 1px solid var(--ink-08); }
+  .stat b { display: block; font-family: var(--serif); font-weight: 400; font-size: 34px; line-height: 1.1; }
+  .stat span { font-size: 11px; letter-spacing: 0.14em; color: var(--ink-40); text-transform: uppercase; }
+
+  /* sections */
+  section { padding: 72px 0 0; }
+  .sec-label {
+    font-size: 11px; letter-spacing: 0.22em; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 16px;
+  }
+  h2 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(28px, 3.8vw, 38px); line-height: 1.15;
+    margin-bottom: 20px; text-wrap: balance;
+  }
+  h2 em { font-style: italic; color: var(--gold); }
+  .prose { max-width: 680px; color: var(--ink-60); }
+  .prose p + p { margin-top: 16px; }
+  .prose strong { color: var(--ink); font-weight: 500; }
+
+  /* chart container */
+  .chart-box {
+    margin-top: 32px;
+    border: 1px solid var(--ink-15);
+    background: var(--paper);
+  }
+  .chart-box img {
+    display: block; width: 100%; height: auto;
+  }
+
+  /* cards */
+  .cards {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1px; background: var(--ink-15);
+    border: 1px solid var(--ink-15); margin-top: 36px;
+  }
+  .card { background: var(--paper); padding: 26px 22px; }
+  .card h3 { font-family: var(--serif); font-weight: 400; font-size: 22px; margin-bottom: 6px; }
+  .card .tag { font-size: 10px; letter-spacing: 0.16em; color: var(--gold); text-transform: uppercase; }
+  .card p { font-size: 13.5px; color: var(--ink-60); margin-top: 10px; }
+
+  /* active card */
+  .active-posture {
+    margin-top: 32px;
+    border: 1px solid var(--gold);
+    padding: 24px;
+    background: rgba(185, 127, 52, 0.04);
+  }
+  .active-posture .status-tag {
+    font-size: 11px; letter-spacing: 0.18em; color: var(--gold); text-transform: uppercase; font-weight: 500;
+  }
+  .active-posture h3 {
+    font-family: var(--serif); font-size: 26px; font-weight: 400; margin: 6px 0 12px;
+  }
+  .active-posture .setup { font-size: 13.5px; color: var(--ink-60); }
+  .active-ladder {
+    font-family: var(--mono); font-size: 13px; color: var(--ink-60);
+    line-height: 1.6; white-space: pre; overflow-x: auto;
+    margin-top: 12px; padding: 12px 16px;
+    background: rgba(32, 29, 24, 0.03); border-left: 2px solid var(--gold);
+  }
+
+  /* table */
+  .tbl-wrap { overflow-x: auto; margin-top: 32px; border-top: 1px solid var(--ink-15); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 600px; }
+  th {
+    text-align: left; font-weight: 500; font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-40);
+    padding: 12px 16px 12px 0; border-bottom: 1px solid var(--ink-15);
+  }
+  td { padding: 12px 16px 12px 0; border-bottom: 1px solid var(--ink-08); color: var(--ink-60); vertical-align: top; }
+  td:first-child { color: var(--ink); }
+  .num { font-variant-numeric: tabular-nums; }
+  .tag-cell { font-size: 11px; color: var(--gold); }
+  code { font-family: var(--mono); font-size: 12px; }
+  .asof { font-size: 11px; letter-spacing: 0.14em; color: var(--ink-40); text-transform: uppercase; margin-top: 18px; }
+
+  /* tear sheet grid */
+  .tear-sheet {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border: 1px solid var(--ink-15); margin-top: 28px; background: var(--ink-15); gap: 1px;
+  }
+  .tear-col { background: var(--paper); padding: 22px 18px; }
+  .tear-col h4 {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px;
+  }
+  .tear-row { display: flex; justify-content: space-between; font-size: 13px; padding: 4px 0; }
+  .tear-row span { color: var(--ink-40); }
+  .tear-row b { font-weight: 500; color: var(--ink); }
+
+  /* footer */
+  footer {
+    margin-top: 96px; padding: 34px 0 44px;
+    border-top: 1px solid var(--ink-15);
+    display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+    font-size: 11px; letter-spacing: 0.14em; color: var(--ink-40); text-transform: uppercase;
+  }
+  footer .links { display: flex; gap: 26px; }
+
+  @media (max-width: 640px) {
+    .hero { padding: 60px 0 40px; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    .tear-sheet { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="mark"><a href="/">wilsco.</a></div>
+    <nav>
+      <a href="/progress/">PROGRESS</a>
+      <a href="/trade/" class="active">TRADE</a>
+      <a href="https://github.com/wils-co">GITHUB ↗</a>
+      <a href="https://x.com/wilsco_">X ↗</a>
+    </nav>
+  </header>
+
+  <!-- GENERATED BLOCKS: everything between the LEDGER:name markers is rewritten by
+       "python3.11 desk.py export" in wils-co/agent-trade-harness. Edit the copy around them, not inside. -->
+
+  <div class="hero">
+    <div class="kicker">Paper trading · Results in R</div>
+    <h1>The trading desk. <em>Measured in R.</em></h1>
+    <p class="lede">This is my paper-trading desk. I make the calls by hand on Hyperliquid perps. A harness sizes each trade from a fixed risk budget, enforces hard limits and records the result in R, which is profit or loss per unit of risk. No real money is on the line yet, and I don't publish dollar amounts.</p>
+    <p class="asof">Updated <!-- LEDGER:asof -->24 September 2026<!-- /LEDGER:asof --></p>
+  </div>
+
+  <div class="stats">
+<!-- LEDGER:stats -->
+    <div class="stat"><b>+5.38R</b><span>Net result</span></div>
+    <div class="stat"><b>+1.35R</b><span>Average per trade</span></div>
+    <div class="stat"><b>75%</b><span>Win rate (3W / 1L)</span></div>
+    <div class="stat"><b>4</b><span>Closed trades (gate is 30)</span></div>
+<!-- /LEDGER:stats -->
+  </div>
+
+  <section id="performance">
+    <div class="sec-label">The ledger</div>
+    <h2>Results in <em>risk units</em>.</h2>
+    <div class="prose">
+      <p>Every trade is sized so that hitting the stop costs 1R before fees. Results are then counted after modelled fees, slippage and funding, which is why a stopped-out trade can come in a little worse than −1R. The dollar figures stay on my machine.</p>
+    </div>
+
+    <div class="chart-box">
+      <img src="/trade/equity_curve.svg" alt="Cumulative result in R after each trade, with the high-water mark and drawdown below it">
+    </div>
+
+    <div class="tear-sheet">
+<!-- LEDGER:tearsheet -->
+      <div class="tear-col">
+        <h4>Edge</h4>
+        <div class="tear-row"><span>Net result</span><b>+5.38R</b></div>
+        <div class="tear-row"><span>Average per trade</span><b>+1.35R</b></div>
+        <div class="tear-row"><span>Win rate</span><b>75.0%</b></div>
+        <div class="tear-row"><span>Average win</span><b>+2.16R</b></div>
+        <div class="tear-row"><span>Average loss</span><b>−1.11R</b></div>
+      </div>
+      <div class="tear-col">
+        <h4>Protection</h4>
+        <div class="tear-row"><span>Max drawdown</span><b>−1.11R</b></div>
+        <div class="tear-row"><span>Recovery factor</span><b>4.85</b></div>
+        <div class="tear-row"><span>Longest losing run</span><b>1</b></div>
+        <div class="tear-row"><span>Longest winning run</span><b>2</b></div>
+        <div class="tear-row"><span>SQN</span><b>1.60</b></div>
+      </div>
+      <div class="tear-col">
+        <h4>Execution</h4>
+        <div class="tear-row"><span>Profit factor</span><b>5.85</b></div>
+        <div class="tear-row"><span>Payoff ratio</span><b>1.95×</b></div>
+        <div class="tear-row"><span>Costs as % of gross</span><b>12.2%</b></div>
+        <div class="tear-row"><span>Average win held</span><b>20.7h</b></div>
+        <div class="tear-row"><span>Average loss held</span><b>3.8h</b></div>
+      </div>
+<!-- /LEDGER:tearsheet -->
+    </div>
+  </section>
+
+  <section id="active">
+    <div class="sec-label">Open now</div>
+    <h2>What's <em>on</em> right now.</h2>
+<!-- LEDGER:open -->
+    <div class="active-posture">
+      <div class="status-tag">Open · paper</div>
+      <h3>Trade #5 · ▼ ETH</h3>
+      <p class="setup">Setup: <code>fade-contd-healthy-retracement</code></p>
+      <pre class="active-ladder">stop  2,719.50 · −1R before costs
+entry 2,684.50
+tp1   2,616.00 · 1.96R
+tp2   2,563.00 · 3.47R</pre>
+    </div>
+<!-- /LEDGER:open -->
+  </section>
+
+  <section id="attribution">
+    <div class="sec-label">Setups</div>
+    <h2>Nothing counts until <em>thirty</em> trades.</h2>
+    <div class="prose">
+      <p>Four trades tell you almost nothing. A 75% win rate over four could easily be luck. So every setup stays marked as incubating until it has at least 30 closed trades and a profit factor above 1 after costs. Only then do I treat it as a real edge.</p>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Setup</th><th>Trades</th><th>Win rate</th><th>Net</th><th>Per trade</th><th>Avg hold</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+<!-- LEDGER:setups -->
+          <tr><td><code>untagged</code></td><td class="num">2</td><td class="num">50%</td><td class="num"><strong>+0.74R</strong></td><td class="num">+0.37R</td><td class="num">9.0h</td><td class="tag-cell">Incubating (n=2/30)</td></tr>
+          <tr><td><code>liq-sweep-reject</code></td><td class="num">1</td><td class="num">100%</td><td class="num"><strong>+1.96R</strong></td><td class="num">+1.96R</td><td class="num">14.3h</td><td class="tag-cell">Incubating (n=1/30)</td></tr>
+          <tr><td><code>fade-the-move</code></td><td class="num">1</td><td class="num">100%</td><td class="num"><strong>+2.68R</strong></td><td class="num">+2.68R</td><td class="num">33.5h</td><td class="tag-cell">Incubating (n=1/30)</td></tr>
+<!-- /LEDGER:setups -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="book">
+    <div class="sec-label">Every trade</div>
+    <h2>The full <em>ledger</em>.</h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Opened (UTC)</th><th>Side</th><th>Coin</th><th>Setup</th><th>Entry</th><th>Stop</th><th>Exit</th><th>Result</th><th>Hold</th><th>R</th></tr>
+        </thead>
+        <tbody>
+<!-- LEDGER:book -->
+          <tr><td><strong>#1</strong></td><td>2026-09-17 23:25</td><td>▲</td><td>ETH</td><td><code>untagged</code></td><td class="num">2,400.00</td><td class="num">2,363.00</td><td class="num">2,522.00</td><td>TP2</td><td class="num">14.2h</td><td class="num"><strong>+1.85R</strong></td></tr>
+          <tr><td><strong>#2</strong></td><td>2026-09-17 23:26</td><td>▼</td><td>ETH</td><td><code>untagged</code></td><td class="num">2,448.25</td><td class="num">2,480.00</td><td class="num">2,480.00</td><td>SL</td><td class="num">3.8h</td><td class="num"><strong>−1.11R</strong></td></tr>
+          <tr><td><strong>#3</strong></td><td>2026-09-20 02:20</td><td>▼</td><td>ETH</td><td><code>liq-sweep-reject</code></td><td class="num">2,635.42</td><td class="num">2,659.50</td><td class="num">2,635.42</td><td>TP1 + BE</td><td class="num">14.3h</td><td class="num"><strong>+1.96R</strong></td></tr>
+          <tr><td><strong>#4</strong></td><td>2026-09-22 06:42</td><td>▼</td><td>ETH</td><td><code>fade-the-move</code></td><td class="num">2,774.29</td><td class="num">2,810.00</td><td class="num">2,640.08</td><td>TP2</td><td class="num">33.5h</td><td class="num"><strong>+2.68R</strong></td></tr>
+          <tr><td><strong>#5</strong></td><td>2026-09-23 23:57</td><td>▼</td><td>ETH</td><td><code>fade-contd-healthy-retracement</code></td><td class="num">2,684.50</td><td class="num">2,719.50</td><td class="num">·</td><td>open</td><td class="num">·</td><td class="num">open</td></tr>
+<!-- /LEDGER:book -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="principles">
+    <div class="sec-label">How it's built</div>
+    <h2>Hard rules, <em>human</em> calls.</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="tag">Rule 01</div>
+        <h3>The model never places orders</h3>
+        <p>It reads my tickets, lays out the levels and keeps an eye on the rules. A plain Python risk engine has the final say on per-trade risk, the daily loss cap, leverage and drawdown, and I make every call.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Rule 02</div>
+        <h3>The tape is context, not a trigger</h3>
+        <p>A local daemon keeps a running record of Hyperliquid's order book, open interest and liquidation clusters, so I can see where the crowded stops are. It shows me the data. What I do with it is up to me.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Rule 03</div>
+        <h3>Costs come off every trade</h3>
+        <p>Each closed trade has modelled taker fees, slippage and funding taken off before it counts. The fee model is an estimate until I've checked it against real fills, so treat small edges with suspicion.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>Melbourne, Australia · Building in public</div>
+    <div class="links">
+      <a href="https://github.com/wils-co/agent-trade-harness">HARNESS ↗</a>
+      <a href="/progress/">PROGRESS</a>
+      <a href="/">WILSCO.AU</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

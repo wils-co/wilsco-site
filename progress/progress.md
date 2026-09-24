@@ -93,7 +93,7 @@ agy (Gemini) made a night-time fluid simulation with the headline refracted thro
 
 This started with an X thread about "liquidity grabs" and a simple question: is there anything real under the hype? US CPI came out that week and answered it live. ETH jumped more than $150 in under an hour as $215M of short positions were liquidated one after another, then gave most of it back. BTC swept its early-month lows, reclaimed them, ran and reversed. Both moves showed up clearly in the positioning data as they happened. What the data couldn't show me was intent, at least not until afterwards.
 
-I turned that into a written framework and then into liq-tape, a read-only dashboard with open interest, order-book depth, funding and my own hand-drawn price levels on one screen. The rule is that it shows data and never gives signals: no alerts, no auto-detection, no orders, and CI checks enforce that. Review cut the first spec from seven panels to four and caught two things I'd assumed wrongly. Hyperliquid has no public liquidation feed, and the heatmap API I planned to use costs money. Six PRs went in over two days, each one reviewed before merging. At one point branch protection blocked my own merge because a rule named a check wrongly. Annoying, and exactly what I'd set it up to do.
+I turned that into a written framework and then into liq-tape, a read-only dashboard with open interest, order-book depth, funding and my own hand-drawn price levels on one screen. Hyperliquid doesn't keep open-interest history, so a small sampler on the Studio polls it every twelve seconds and builds its own. Every hour it runs is data I couldn't get back later. The rule is that it shows data and never gives signals: no alerts, no auto-detection, no orders, and CI checks enforce that. Review cut the first spec from seven panels to four and caught two things I'd assumed wrongly. Hyperliquid has no public liquidation feed, and the heatmap API I planned to use costs money. Six PRs went in over two days, each one reviewed before merging. At one point branch protection blocked my own merge because a rule named a check wrongly. Annoying, and exactly what I'd set it up to do.
 
 ### 14–17 September 2026: More layers on the board
 
@@ -109,7 +109,7 @@ I also tested my own take-profit habit, where I anchor Fibonacci levels on candl
 
 The desk grew into a paper-trading harness. Every trade is a ticket with a stop, sized from a fixed risk budget and checked by hard rules: a per-trade risk cap, a daily loss cap, a leverage cap and a drawdown kill switch. Each trade is tagged with its setup and closed at a real price.
 
-On 24 September the journal started publishing itself. One command writes a [public ledger](https://github.com/wils-co/agent-trade-harness/blob/main/TRADES.md) and an equity curve in R, meaning profit or loss per unit of risk, after modelled fees and funding. Dollar amounts and my balance stay on my machine. After the first four closed trades it's +5.38R: three wins and one loss of −1.11R. That's four trades. No setup counts as an edge until it has thirty, and these are paper trades. The harness can't place real orders.
+On 24 September the journal started publishing itself. One command updates [the trading page on this site](/trade/) and a [ledger on GitHub](https://github.com/wils-co/agent-trade-harness/blob/main/TRADES.md), both in R, meaning profit or loss per unit of risk, after modelled fees and funding. Dollar amounts and my balance stay on my machine. After the first four closed trades it's +5.38R: three wins and one loss of −1.11R. That's four trades. No setup counts as an edge until it has thirty, and these are paper trades. The harness can't place real orders.
 
 ## Running now
 
@@ -123,7 +123,7 @@ On 24 September the journal started publishing itself. One command writes a [pub
 | Open practice of learning | Living | Distilled topic notes, stack-fit decision cards and regular audits. This page is curated from them. |
 | Smiles by Design | Live build | Julia's practice site: 14 pages, copy checked against health-advertising rules, and three motion prototypes on the bench. |
 | [liq-tape](https://github.com/wils-co/liq-tape) | Public repo | My read-only liquidity dashboard. It shows the data and leaves the decisions to me, and CI blocks anything that looks like a signal. |
-| [Trade harness](https://github.com/wils-co/agent-trade-harness) | Paper · public ledger | Paper trading with hard risk limits. The journal publishes itself in R, and dollar figures never reach the repo. |
+| [Trading desk](/trade/) | Paper · public ledger | Paper trading with hard risk limits. The journal publishes itself in R, and dollar figures never reach the repo. |
 | Research pipeline | Active | One click turns a post or video into a filed note, and a second loop checks the work. |
 
 ## Measured, not assumed

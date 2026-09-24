@@ -10,6 +10,7 @@
  */
 const PREFIXES = [
   "/progress",
+  "/trade",
   "/notes",
   "/work",
   "/about",
