@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Wilsco — Progress: the first seven weeks</title>
-<meta name="description" content="Seven weeks from a new Mac Studio to a measured, multi-agent local AI stack. A progress report from a public journey from sales into AI engineering.">
-<meta property="og:title" content="Wilsco — Progress: the first seven weeks">
-<meta property="og:description" content="Mid-June to 8 August 2026: what got built, what got measured, and what failed in useful ways.">
+<title>Wilsco — Progress: fourteen weeks in</title>
+<meta name="description" content="Fourteen weeks from a new Mac Studio to a tested multi-agent stack, a dental practice website, and a read-only trading desk. A progress report from a public move from sales into AI engineering.">
+<meta property="og:title" content="Wilsco — Progress: fourteen weeks in">
+<meta property="og:description" content="Mid-June to 24 September 2026: what I built, what I measured, and what broke along the way.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -165,9 +165,9 @@
   </header>
 
   <div class="hero">
-    <div class="kicker">Progress report · Mid-June — 8 August 2026</div>
-    <h1>Seven weeks in. <em>Curiosity, compounding.</em></h1>
-    <p class="lede">In mid-June 2026 a Mac Studio arrived and a public repositioning began: from a sales career into AI engineering, documented in the open. This is what seven weeks of evenings and weekends actually produced — measured, shipped, and honestly logged, including the failures.</p>
+    <div class="kicker">Progress report · Mid-June — 24 September 2026</div>
+    <h1>Fourteen weeks in. <em>Curiosity, compounding.</em></h1>
+    <p class="lede">In mid-June 2026 a Mac Studio arrived and I started a public move from a sales career into AI engineering. This page is what fourteen weeks of evenings and weekends has actually produced, including the parts that broke.</p>
   </div>
 
   <div class="stats">
@@ -242,6 +242,83 @@
         <p>Separately, a two-week-old "can't be trusted with stateful code" verdict on a local model gets re-tested instead of carried forward. Mechanical probes reverse the hard deny to conditional: two July-failing game builds pass in August. Paired with a stronger reasoning model as its planner, the same model then clears a task class it died on solo in July. One stubborn failure along the way is a permission-grammar bug blocking file access, not a capability gap — found and fixed.</p>
       </div>
 
+      <div class="t-entry">
+        <div class="t-date">9–18 August 2026</div>
+        <h3>A research pipeline that files its own notes</h3>
+        <p>I read a lot of X threads and YouTube videos about AI tooling, and most of it used to vanish into bookmarks. Now there's a distill button on my dashboard. It sends a post or transcript to a free cloud model and files a structured page into my notes library. From 12 August a second loop grades those pages against a rubric and flags the thin ones for another pass. To choose the model for the heavier synthesis work, I ran the same messy 30,000-token bundle through three candidates and compared what came back.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">13–22 August 2026</div>
+        <h3>New models had to earn their seats</h3>
+        <p>Two big model releases landed in the same week. I ran the same hard prompt through the old and new versions. Both passed and the new ones were a little more polished, so I changed a default and left the architecture alone. A dense 27B coding model won the careful-worker seat after head-to-head runs from 15 to 17 August. On 21 August I swapped the local 35B seat to a new build and retired a relay that had been quietly routing its thinking through a cloud model. The same week produced a reusable eval skill, so the next model swap is a command I run rather than a small project.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">18–25 August 2026</div>
+        <h3>Building the place this page lives</h3>
+        <p>I made the first commit of this site on 18 August. On the 21st I put Cloudflare in front of wilsco.au, so one domain now serves the landing page, this report and tunnels back to the Studio. The same day I wrote a candid review of my public presence against the 18-month goal. An llms.txt file and a proper agent-os page followed on the 25th.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">21–25 August 2026</div>
+        <h3><a href="/work/agent-os/" style="text-decoration: underline; text-underline-offset: 3px;">agent-os</a> goes open source</h3>
+        <p>I moved the routing policy into one file that says which seat does which job. The seats got little avatars on the dashboard, which helps more than it sounds when you're scanning ten of them. I hardened the server with an explicit route list, capped caches and authenticated writes, then open-sourced it. Stripping personal details out of the public copy took three passes, because the first two kept missing things.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">25–28 August 2026</div>
+        <h3>Trading, starting with a rule</h3>
+        <p>Before I built any trading tools I wrote one rule down: the model never places orders. It can write specs, review my journal and point out anything odd. A plain, deterministic risk engine sits between any idea and any exchange, and it has the final veto. On 28 August I built a read-only market desk on that rule, and everything I've built for trading since has kept to it.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">26 August 2026</div>
+        <h3>Six weeks, boiled down</h3>
+        <p>By late August I had six weeks of raw session logs and kept relearning the same lessons. So I condensed them into four reference notes: why local speed numbers so often don't hold up, a runbook of every gateway and tunnel failure that had already cost me an evening, the common serving pitfalls, and a map of which instruction files each coding agent actually reads. They don't all read the same files, and that difference had caused real bugs.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">27 August – 5 September 2026</div>
+        <h3>A real website for a real practice</h3>
+        <p>My wife Julia is a dentist, and we're setting up her practice, Smiles by Design in Wheelers Hill. I look after the digital side. It started with a homepage prototype, a tooth-anatomy explainer, a look at a competitor's site and a catchment analysis. On 3 and 4 September it became a proper 14-page site: copy for eight treatments, a local SEO pack, an icon set, and then a restyle into something quieter and more boutique with a little scroll motion.</p>
+        <p>Every treatment page went through a pass against Australia's rules for health advertising. That means no outcome testimonials, no "guaranteed" or "best", and no before-and-after galleries that suggest a typical result. The site was deployed on the 5th, and <a href="https://github.com/wils-co/jaws-dental-practice" style="text-decoration: underline; text-underline-offset: 3px;">the code is public</a>.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">8–11 September 2026</div>
+        <h3>One brief, three models, three answers</h3>
+        <p>Then I got distracted in a good way. I pulled apart bunqlabs.com, a site with beautiful WebGL motion, and noticed it draws all its text inside the canvas and leaves Google a few hidden lines. I wanted that polish without giving up real, crawlable text. So I gave the same brief to three agents from three different model families and let each one build a hero for the practice site.</p>
+        <p>agy (Gemini) made a night-time fluid simulation with the headline refracted through it. Claude Code made a pinned stage of 69,000 particles with real HTML text sitting on top. Grok Build started on a pale limestone bench and faded to night as a veneer dissolved into a point cloud. Same brief, three quite different tastes, which is exactly why I keep more than one model family around. On the 11th I put together a hands-on course covering the whole pipeline, right down to rendering in Blender on the Studio's GPU with no window open.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">5–13 September 2026</div>
+        <h3><a href="https://github.com/wils-co/liq-tape" style="text-decoration: underline; text-underline-offset: 3px;">liq-tape</a>: a dashboard for reading liquidity</h3>
+        <p>This started with an X thread about "liquidity grabs" and a simple question: is there anything real under the hype? US CPI came out that week and answered it live. ETH jumped more than $150 in under an hour as $215M of short positions were liquidated one after another, then gave most of it back. BTC swept its early-month lows, reclaimed them, ran and reversed. Both moves showed up clearly in the positioning data as they happened. What the data couldn't show me was intent, at least not until afterwards.</p>
+        <p>I turned that into a written framework and then into liq-tape, a read-only dashboard with open interest, order-book depth, funding and my own hand-drawn price levels on one screen. The rule is that it shows data and never gives signals: no alerts, no auto-detection, no orders, and CI checks enforce that. Review cut the first spec from seven panels to four and caught two things I'd assumed wrongly. Hyperliquid has no public liquidation feed, and the heatmap API I planned to use costs money. Six PRs went in over two days, each one reviewed before merging. At one point branch protection blocked my own merge because a rule named a check wrongly. Annoying, and exactly what I'd set it up to do.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">14–17 September 2026</div>
+        <h3>More layers on the board</h3>
+        <p>Six more PRs: order-book walls and sampled CVD, a one-screen time-by-price view, a liquidation map rebuilt from the positions of the 200 largest accounts, a view of which liquidation clusters have already been swept, a live trade feed over websocket, and trade markers you can read without colour. I'm red-green colourblind, so that last one mattered to me. Old samples are archived after ten days, never deleted, and I can open the board from anywhere behind a login.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">17–24 September 2026</div>
+        <h3>Taking the desk to my phone</h3>
+        <p>The board is great at a desk and useless on a phone. So I added a Telegram command: type "tape eth" and you get a one-screen summary built from the local board, with no calls out to the exchange and almost no cost. Everything uses arrows and plus/minus signs instead of red and green.</p>
+        <p>I also tested my own take-profit habit, where I anchor Fibonacci levels on candle bodies, against 1,000 bars of SOL on three timeframes. Price came back to the midline about 83–88% of the time and retraced fully about half the time. Useful context, but not a signal.</p>
+      </div>
+
+      <div class="t-entry">
+        <div class="t-date">18–24 September 2026</div>
+        <h3>The paper book, published in R</h3>
+        <p>The desk grew into a paper-trading harness. Every trade is a ticket with a stop, sized from a fixed risk budget and checked by hard rules: a per-trade risk cap, a daily loss cap, a leverage cap and a drawdown kill switch. Each trade is tagged with its setup and closed at a real price.</p>
+        <p>On 24 September the journal started publishing itself. One command writes a <a href="https://github.com/wils-co/agent-trade-harness/blob/main/TRADES.md" style="text-decoration: underline; text-underline-offset: 3px;">public ledger</a> and an equity curve in R, meaning profit or loss per unit of risk, after modelled fees and funding. Dollar amounts and my balance stay on my machine. After the first four closed trades it's +5.38R: three wins and one loss of −1.11R. That's four trades. No setup counts as an edge until it has thirty, and these are paper trades. The harness can't place real orders.</p>
+      </div>
+
     </div>
   </section>
 
@@ -280,6 +357,26 @@
         <h3>Open practice of learning</h3>
         <p>Distilled topic notes, stack-fit decision cards, and recurring audits — the source this page is curated from.</p>
       </div>
+      <div class="card">
+        <div class="tag">Live build</div>
+        <h3>Smiles by Design</h3>
+        <p>Julia's practice site: 14 pages, copy checked against health-advertising rules, and three motion prototypes on the bench.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Public repo</div>
+        <h3><a href="https://github.com/wils-co/liq-tape">liq-tape →</a></h3>
+        <p>My read-only liquidity dashboard. It shows the data and leaves the decisions to me, and CI blocks anything that looks like a signal.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Paper · public ledger</div>
+        <h3><a href="https://github.com/wils-co/agent-trade-harness">Trade harness →</a></h3>
+        <p>Paper trading with hard risk limits. The journal publishes itself in R, and dollar figures never reach the repo.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Active</div>
+        <h3>Research pipeline</h3>
+        <p>One click turns a post or video into a filed note, and a second loop checks the work.</p>
+      </div>
     </div>
   </section>
 
@@ -312,6 +409,8 @@
     <div class="prose">
       <p>Building in public means logging what broke, because that is where the learning compressed. A session-summary hook fired twenty times in two minutes and polluted its own dataset — then, run on its own build log, showed a self-referential misread and a truncation bug that dropped the first ~24,000 characters of long transcripts. The most polished code repeatedly hid the most severe bugs — including a local function that shadowed a JavaScript built-in and recursed infinitely on first click. One model verbally committed to a task across four turns without ever calling a tool. Well-hedged advice from a credible source made results measurably worse here, because it came from a different serving stack. Stateful single-file app generation was gated <strong>closed</strong> for the local tier in late July; August re-tests moved that class to <strong>conditional</strong> (run-verify before ship), in writing, in the same record.</p>
       <p>And twice in one day, findings already written down were retracted in place when re-testing showed the test method — not the model — was at fault. The record stays honest or it is worthless.</p>
+      <p>Late August and September had their share too. Two agents edited two different copies of the practice site on the same day, and three pairs of files quietly drifted apart. I fixed it by making the repo the only place anything gets edited. The copy I read on my phone is now generated from it, with a do-not-edit banner and a check that fails if they drift.</p>
+      <p>A draft spec for liq-tape assumed a live liquidation feed that doesn't exist. If review hadn't caught it, the main panel would have shown guesses dressed up as data. My drawdown figure was divided by current equity instead of the previous peak, so it looked worse exactly when I was losing and better once I'd recovered. It now measures how far I am below the high-water mark. And going public took more than one try: the agent-os snapshot needed a third cleaning pass, and the trading repo's first push left my account size readable in a config file and a test. Those values now stay on my machine.</p>
     </div>
   </section>
 
@@ -327,6 +426,9 @@
       <div class="lesson"><div><b>Measure on real tasks, not benchmarks.</b><p>Every keeper decision here came from a fixed task with a judge and a rubric — or from a real production job — never from a leaderboard.</p></div></div>
       <div class="lesson"><div><b>Roles over a model zoo.</b><p>Named seats with defined jobs and a single source of truth, so adding a model is a roster decision with a test gate, not an accumulation.</p></div></div>
       <div class="lesson"><div><b>Retract in writing.</b><p>When a finding turns out wrong, it gets corrected in the same file with the reason. The record is the asset.</p></div></div>
+      <div class="lesson"><div><b>One copy of everything.</b><p>If two copies can both be edited, they&#x27;ll drift. Generate the second one instead.</p></div></div>
+      <div class="lesson"><div><b>The model never places orders.</b><p>It describes and checks. A deterministic rule has the veto, and I make the call.</p></div></div>
+      <div class="lesson"><div><b>Different families, not copies.</b><p>Three model families on one brief gave me three different designs. Three copies of one model would have given me one.</p></div></div>
     </div>
   </section>
 
