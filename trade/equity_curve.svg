@@ -30,26 +30,29 @@
   <text x="50" y="254.0" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" fill="#8a857b" text-anchor="end">0.0R</text>
   <line x1="60" y1="320.0" x2="730" y2="320.0" stroke="#e7e3db" stroke-dasharray="3,3"/>
   <text x="50" y="324.0" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" fill="#8a857b" text-anchor="end">-1.5R</text>
-  <text x="60" y="24" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="13" font-weight="600" fill="#201d18">Cumulative Performance (+5.38R)</text>
+  <text x="60" y="24" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="13" font-weight="600" fill="#201d18">Cumulative Performance (+4.02R)</text>
   <text x="730" y="24" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" fill="#8a857b" text-anchor="end">High-Water Mark: +5.38R</text>
   <text x="60" y="244" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" font-weight="600" fill="#8a857b">Underwater Profile (Drawdown)</text>
-  <polyline points="60.0,215.8 227.5,163.2 395.0,163.2 562.5,139.1 730.0,62.9" fill="none" stroke="#8a857b" stroke-width="1.5" stroke-dasharray="4,4"/>
-  <polygon points="60.0,215.8 60.0,215.8 227.5,163.2 395.0,194.8 562.5,139.1 730.0,62.9 730.0,215.8" fill="url(#eqGrad)"/>
-  <polyline points="60.0,215.8 227.5,163.2 395.0,194.8 562.5,139.1 730.0,62.9" fill="none" stroke="#b97f34" stroke-width="2.5" filter="url(#glow)"/>
+  <polyline points="60.0,215.8 194.0,163.2 328.0,163.2 462.0,139.1 596.0,62.9 730.0,62.9" fill="none" stroke="#8a857b" stroke-width="1.5" stroke-dasharray="4,4"/>
+  <polygon points="60.0,215.8 60.0,215.8 194.0,163.2 328.0,194.8 462.0,139.1 596.0,62.9 730.0,101.6 730.0,215.8" fill="url(#eqGrad)"/>
+  <polyline points="60.0,215.8 194.0,163.2 328.0,194.8 462.0,139.1 596.0,62.9 730.0,101.6" fill="none" stroke="#b97f34" stroke-width="2.5" filter="url(#glow)"/>
   <circle cx="60.0" cy="215.8" r="4.5" fill="#f7f4ee" stroke="#b97f34" stroke-width="2"/>
-  <circle cx="227.5" cy="163.2" r="4.5" fill="#f7f4ee" stroke="#b97f34" stroke-width="2"/>
-  <text x="227.5" y="153.2" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" font-weight="bold" fill="#201d18" text-anchor="middle">+1.85R</text>
-  <circle cx="395.0" cy="194.8" r="4.5" fill="#f7f4ee" stroke="#b97f34" stroke-width="2"/>
-  <text x="395.0" y="184.8" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" font-weight="bold" fill="#201d18" text-anchor="middle">+0.74R</text>
-  <circle cx="562.5" cy="139.1" r="4.5" fill="#f7f4ee" stroke="#b97f34" stroke-width="2"/>
-  <text x="562.5" y="129.1" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" font-weight="bold" fill="#201d18" text-anchor="middle">+2.70R</text>
-  <circle cx="730.0" cy="62.9" r="4.5" fill="#f7f4ee" stroke="#b97f34" stroke-width="2"/>
-  <text x="730.0" y="52.9" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" font-weight="bold" fill="#201d18" text-anchor="middle">+5.38R</text>
-  <polygon points="60.0,250.0 60.0,250.0 227.5,250.0 395.0,301.8 562.5,250.0 730.0,250.0 730.0,250.0" fill="url(#ddGrad)"/>
-  <polyline points="60.0,250.0 227.5,250.0 395.0,301.8 562.5,250.0 730.0,250.0" fill="none" stroke="#6b665d" stroke-width="1.8"/>
+  <circle cx="194.0" cy="163.2" r="4.5" fill="#f7f4ee" stroke="#b97f34" stroke-width="2"/>
+  <text x="194.0" y="153.2" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" font-weight="bold" fill="#201d18" text-anchor="middle">+1.85R</text>
+  <circle cx="328.0" cy="194.8" r="4.5" fill="#f7f4ee" stroke="#b97f34" stroke-width="2"/>
+  <text x="328.0" y="184.8" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" font-weight="bold" fill="#201d18" text-anchor="middle">+0.74R</text>
+  <circle cx="462.0" cy="139.1" r="4.5" fill="#f7f4ee" stroke="#b97f34" stroke-width="2"/>
+  <text x="462.0" y="129.1" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" font-weight="bold" fill="#201d18" text-anchor="middle">+2.70R</text>
+  <circle cx="596.0" cy="62.9" r="4.5" fill="#f7f4ee" stroke="#b97f34" stroke-width="2"/>
+  <text x="596.0" y="52.9" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" font-weight="bold" fill="#201d18" text-anchor="middle">+5.38R</text>
+  <circle cx="730.0" cy="101.6" r="4.5" fill="#f7f4ee" stroke="#b97f34" stroke-width="2"/>
+  <text x="730.0" y="91.6" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" font-weight="bold" fill="#201d18" text-anchor="middle">+4.02R</text>
+  <polygon points="60.0,250.0 60.0,250.0 194.0,250.0 328.0,301.8 462.0,250.0 596.0,250.0 730.0,313.5 730.0,250.0" fill="url(#ddGrad)"/>
+  <polyline points="60.0,250.0 194.0,250.0 328.0,301.8 462.0,250.0 596.0,250.0 730.0,313.5" fill="none" stroke="#6b665d" stroke-width="1.8"/>
   <text x="60.0" y="348" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" fill="#8a857b" text-anchor="middle">Start</text>
-  <text x="227.5" y="348" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" fill="#8a857b" text-anchor="middle">#1</text>
-  <text x="395.0" y="348" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" fill="#8a857b" text-anchor="middle">#2</text>
-  <text x="562.5" y="348" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" fill="#8a857b" text-anchor="middle">#3</text>
-  <text x="730.0" y="348" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" fill="#8a857b" text-anchor="middle">#4</text>
+  <text x="194.0" y="348" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" fill="#8a857b" text-anchor="middle">#1</text>
+  <text x="328.0" y="348" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" fill="#8a857b" text-anchor="middle">#2</text>
+  <text x="462.0" y="348" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" fill="#8a857b" text-anchor="middle">#3</text>
+  <text x="596.0" y="348" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" fill="#8a857b" text-anchor="middle">#4</text>
+  <text x="730.0" y="348" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="11" fill="#8a857b" text-anchor="middle">#5</text>
 </svg>
